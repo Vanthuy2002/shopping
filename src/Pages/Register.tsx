@@ -5,46 +5,100 @@ import FlexLayout from 'src/Layout/Flex';
 import Checkbox from 'src/modules/Checkbox';
 import Button from 'src/modules/Button';
 import Typography from 'src/components/Typography';
-import FormControl from 'src/modules/Form/FormControl';
+import { FormControl } from 'src/modules/Form';
+import WebBrand from 'src/components/Brand';
+import FormErr from 'src/modules/Form/FormErr';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { messValidate, regexPassword } from 'src/utils/constants';
+
+const { email, password, required, regexMess, checkboxMess } = messValidate;
+const schema = yup.object({
+  username: yup.string().required(required).matches(regexPassword, regexMess),
+  email: yup.string().required(required).email(email),
+  password: yup.string().required(required).min(8, password),
+  terms: yup.bool().required().oneOf([true], checkboxMess),
+});
+
+type RegisterData = yup.InferType<typeof schema>;
 
 const Register = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterData>({
+    resolver: yupResolver(schema),
+  });
+
+  const handleRegister = (values: RegisterData) => {
+    console.log(values);
+  };
   return (
     <section className='bg-gray-50 dark:bg-gray-900'>
       <FlexLayout className='flex-col justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
-        <Link
-          to='/'
-          className='flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white'
-        >
-          Shopping App
-        </Link>
+        <WebBrand className='mb-6' />
 
         <div className='w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
           <div className='p-6 space-y-4 md:space-y-6 sm:p-8'>
             <Typography className='text-xl font-bold leading-tight tracking-tight text-gray-700 md:text-2xl dark:text-white'>
               Create and account
             </Typography>
-            <form className='space-y-4 md:space-y-6'>
+            <form
+              onSubmit={handleSubmit(handleRegister)}
+              className='space-y-4 md:space-y-6'
+              autoComplete='off'
+            >
               <FormControl>
-                <Label name='email'>Your email</Label>
-                <Input name='email' placeholder='Enter your email...' />
+                <Label name='username'>Username</Label>
+                <Input
+                  {...register('username')}
+                  id='username'
+                  placeholder='Enter your username...'
+                />
+                {errors && errors.username?.message && (
+                  <FormErr>{errors.username.message}</FormErr>
+                )}
               </FormControl>
 
               <FormControl>
-                <Label name='email'>Your Password</Label>
-                <Input name='password' placeholder='Enter your password...' />
+                <Label name='email'>Your email</Label>
+                <Input
+                  {...register('email')}
+                  id='email'
+                  placeholder='Enter your email...'
+                />
+                {errors && errors.email?.message && (
+                  <FormErr>{errors.email.message}</FormErr>
+                )}
               </FormControl>
+
               <FormControl>
-                <Label name='confirm'>Comfirm Password</Label>
-                <Input name='confirm' placeholder='Enter again password...' />
+                <Label name='password'>Your Password</Label>
+                <Input
+                  {...register('password')}
+                  id='password'
+                  type='password'
+                  placeholder='********'
+                />
+                {errors && errors.password?.message && (
+                  <FormErr>{errors.password.message}</FormErr>
+                )}
               </FormControl>
 
               <FlexLayout className='!items-start'>
                 <FlexLayout className='h-5'>
-                  <Checkbox name='terms'></Checkbox>
+                  <Checkbox {...register('terms')} id='terms' />
                 </FlexLayout>
                 <div className='ml-3 text-sm'>
-                  <Label className='select-none text-gray-500' name='terms'>
-                    I accept the policy and terms
+                  <Label
+                    className={`select-none ${
+                      errors.terms?.message ? 'text-red-500' : 'text-black'
+                    }`}
+                    name='terms'
+                  >
+                    I accept terms and policy
                   </Label>
                 </div>
               </FlexLayout>

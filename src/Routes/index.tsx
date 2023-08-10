@@ -4,13 +4,15 @@ import Loading from 'src/modules/Effect';
 
 const Home = lazy(() => import('src/Pages/Home'));
 const Register = lazy(() => import('src/Pages/Register'));
+const Login = lazy(() => import('src/Pages/Login'));
 
 const Routing = () => {
   return (
     <Suspense fallback={<Loading />}>
       <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='register' element={<Register />}></Route>
+        <Route path='/' element={<Home />} />
+        <Route path='register' element={<Register />} />
+        <Route path='login' element={<Login />} />
       </Routes>
     </Suspense>
   );

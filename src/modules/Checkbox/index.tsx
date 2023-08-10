@@ -1,22 +1,20 @@
-import classNames from 'classnames';
+import { InputProps } from '../Input';
+import { forwardRef } from 'react';
 
-interface CheckboxProps {
-  name: string;
-  className?: string;
-}
-
-const Checkbox = ({ name, className }: CheckboxProps) => {
+const Checkbox = (
+  props: InputProps,
+  ref: React.LegacyRef<HTMLInputElement> | null
+) => {
   return (
     <input
-      id={name}
-      name={name}
+      ref={ref}
       type='checkbox'
-      className={classNames(
-        'w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800',
-        className
-      )}
+      className={
+        'w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800'
+      }
+      {...props}
     />
   );
 };
 
-export default Checkbox;
+export default forwardRef(Checkbox);

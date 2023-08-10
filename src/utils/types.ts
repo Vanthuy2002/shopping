@@ -30,3 +30,11 @@ export interface ProductItemsProps {
   image: string;
   price: number;
 }
+
+export interface FormValidateProps {
+  required: string;
+  email: string;
+  password: string;
+  regexMess: string;
+  checkboxMess: string;
+}
