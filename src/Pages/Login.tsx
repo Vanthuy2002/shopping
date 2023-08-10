@@ -8,13 +8,43 @@ import { FormControl } from 'src/modules/Form';
 import FormErr from 'src/modules/Form/FormErr';
 import Input from 'src/modules/Input';
 import Label from 'src/modules/Label';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { messValidate } from 'src/utils/constants';
+import { useState } from 'react';
+
+const { email, password, required } = messValidate;
+const schema = yup.object({
+  email: yup.string().required(required).email(email),
+  password: yup.string().required(required).min(8, password),
+});
+
+type LoginProps = yup.InferType<typeof schema>;
 
 const Login = () => {
+  const [remember, setRemember] = useState<boolean>(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginProps>({
+    resolver: yupResolver(schema),
+  });
+
+  const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setRemember(e.target.checked);
+  };
+
+  const handleLogin = (values: LoginProps) => {
+    console.log({ ...values, remember });
+  };
+
   return (
     <section className='bg-gray-50 dark:bg-gray-900'>
       <FlexLayout className='flex-col justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
         {/* Logo */}
-        <WebBrand className='mb-6'></WebBrand>
+        <WebBrand className='mb-6' />
 
         <div className='w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
           <div className='p-6 space-y-4 md:space-y-6 sm:p-8'>
@@ -22,31 +52,43 @@ const Login = () => {
               Sign in to your account
             </Typography>
 
-            <form className='space-y-4 md:space-y-6'>
+            <form
+              className='space-y-4 md:space-y-6'
+              autoComplete='off'
+              onSubmit={handleSubmit(handleLogin)}
+            >
               <FormControl>
                 <Label name='email'>Your email</Label>
                 <Input
                   id='email'
-                  name='email'
+                  {...register('email')}
                   placeholder='Enter your email...'
                 />
-                <FormErr>This field is required</FormErr>
+                {errors && errors.email?.message && (
+                  <FormErr>{errors.email.message}</FormErr>
+                )}
               </FormControl>
 
               <FormControl>
-                <Label name='email'>Your Password</Label>
+                <Label name='password'>Your Password</Label>
                 <Input
                   id='password'
-                  name='password'
+                  {...register('password')}
                   placeholder='Enter your password...'
                 />
-                <FormErr>This field is required</FormErr>
+                {errors && errors.password?.message && (
+                  <FormErr>{errors.password.message}</FormErr>
+                )}
               </FormControl>
 
               <FlexLayout className='justify-between'>
                 <div className='flex items-start'>
                   <FlexLayout className='h-5'>
-                    <Checkbox name='remember'></Checkbox>
+                    <Checkbox
+                      id='remember'
+                      checked={remember}
+                      onChange={handleCheck}
+                    />
                   </FlexLayout>
                   <div className='ml-3 text-sm'>
                     <Label name='remember' className='select-none'>
