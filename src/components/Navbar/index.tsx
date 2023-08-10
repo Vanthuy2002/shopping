@@ -4,8 +4,10 @@ import { Link } from 'react-router-dom';
 import FlexLayout from 'src/Layout/Flex';
 import Button from 'src/modules/Button';
 import Input from 'src/modules/Input';
+import { useURL } from 'src/hooks/useURL';
 
 const Navbar = () => {
+  const goToRegsiter = useURL('/register');
   return (
     <nav className='bg-white border-gray-200 dark:bg-gray-900'>
       <FlexLayout className='flex-wrap justify-between max-w-screen-xl p-4 mx-auto'>
@@ -18,7 +20,7 @@ const Navbar = () => {
           </Typography>
         </Link>
         <FlexLayout className='md:order-2'>
-          <Button>Get Started</Button>
+          <Button onClick={goToRegsiter}>Get Started</Button>
 
           <Button variant='light' customClass='md:hidden'>
             <Bars3BottomRightIcon className='w-6 h-6' />
