@@ -22,3 +22,11 @@ export interface FlexProps {
   gap: string | number;
   className: string;
 }
+
+export interface ProductItemsProps {
+  id: string;
+  title: string;
+  desc: string;
+  image: string;
+  price: number;
+}

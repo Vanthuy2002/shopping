@@ -1,10 +1,10 @@
 import './App.css';
-import CurrentLayout from './Layout';
+import Routing from './Routes';
 
 function App() {
   return (
     <main className='App'>
-      <CurrentLayout></CurrentLayout>
+      <Routing></Routing>
     </main>
   );
 }
