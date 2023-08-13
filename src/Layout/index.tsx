@@ -1,6 +1,7 @@
 import { ChildProps } from 'src/utils/types';
 import Header from './Header';
 import { Fragment } from 'react';
+import Footer from './Footer';
 
 interface LayoutProps {
   children?: ChildProps;
@@ -9,8 +10,9 @@ interface LayoutProps {
 const CurrentLayout = ({ children }: LayoutProps) => {
   return (
     <Fragment>
-      <Header></Header>
+      <Header />
       {children}
+      <Footer />
     </Fragment>
   );
 };
