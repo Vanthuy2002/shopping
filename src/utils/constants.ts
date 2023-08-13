@@ -1,4 +1,8 @@
-import { FormValidateProps, contactsListProps } from './types';
+import {
+  FormValidateProps,
+  ProductItemsProps,
+  contactsListProps,
+} from './types';
 
 export const contactList: contactsListProps = {
   contact: ['Chat with us', '+420 336 775 664', 'info@freshnesecom.com'],
@@ -16,3 +20,12 @@ export const messValidate: FormValidateProps = {
 export const regexPassword = /^[a-zA-Z0-9\s]*$/;
 
 export const createUUID = () => crypto.randomUUID();
+const randomPrice = (Math.random() * 10).toFixed(2);
+
+export const fakeData: ProductItemsProps = {
+  id: createUUID(),
+  title: 'Product title',
+  desc: 'Lorem ipsum dolor sit amet.',
+  image: 'https://source.unsplash.com/random',
+  price: randomPrice,
+};

@@ -5,6 +5,7 @@ import Loading from 'src/modules/Effect';
 const Home = lazy(() => import('src/Pages/Home'));
 const Register = lazy(() => import('src/Pages/Register'));
 const Login = lazy(() => import('src/Pages/Login'));
+const CategoryDetails = lazy(() => import('src/Pages/Category'));
 
 const Routing = () => {
   return (
@@ -13,6 +14,7 @@ const Routing = () => {
         <Route path='/' element={<Home />} />
         <Route path='register' element={<Register />} />
         <Route path='login' element={<Login />} />
+        <Route path='category/:slug' element={<CategoryDetails />} />
       </Routes>
     </Suspense>
   );

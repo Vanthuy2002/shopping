@@ -28,7 +28,7 @@ export interface ProductItemsProps {
   title: string;
   desc: string;
   image: string;
-  price: number;
+  price: number | string;
 }
 
 export interface FormValidateProps {
@@ -38,3 +38,5 @@ export interface FormValidateProps {
   regexMess: string;
   checkboxMess: string;
 }
+
+export type IEvents = React.ChangeEvent<HTMLInputElement>;

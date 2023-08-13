@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import FlexLayout from 'src/Layout/Flex';
+import Rating from 'src/components/Rating';
 import Typography from 'src/components/Typography';
 import Button from 'src/modules/Button';
 import { ProductItemsProps } from 'src/utils/types';
@@ -12,9 +13,13 @@ const ProductItems = ({
   price,
 }: Partial<ProductItemsProps>) => {
   return (
-    <div className='bg-white p-4 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
+    <div className='p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
       <Link to={`/details/${id}`}>
-        <img className='rounded-lg object-cover' src={image} alt={title} />
+        <img
+          className='rounded-lg object-cover w-[270px] h-[200px]'
+          src={image}
+          alt={title}
+        />
       </Link>
       <div className='mt-5'>
         <Link to={`/details/${id}`}>
@@ -32,7 +37,9 @@ const ProductItems = ({
           {desc}
         </Typography>
 
-        <FlexLayout className='justify-between'>
+        <Rating star={5} />
+
+        <FlexLayout className='justify-between mt-2'>
           <Typography as='h3' className='text-lg font-semibold'>
             {price} USD
           </Typography>
