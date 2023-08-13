@@ -1,17 +1,13 @@
-import { ChildProps } from 'src/utils/types';
 import Header from './Header';
 import { Fragment } from 'react';
 import Footer from './Footer';
+import { Outlet } from 'react-router-dom';
 
-interface LayoutProps {
-  children?: ChildProps;
-}
-
-const CurrentLayout = ({ children }: LayoutProps) => {
+const CurrentLayout = () => {
   return (
     <Fragment>
       <Header />
-      {children}
+      <Outlet></Outlet>
       <Footer />
     </Fragment>
   );

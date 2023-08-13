@@ -1,12 +1,11 @@
-import React from 'react';
-import CurrentLayout from 'src/Layout';
+import React, { Fragment } from 'react';
 import { FilterBrand } from 'src/components/Category/Filter';
 import { ProductItems } from 'src/components/Products';
 import { fakeData } from 'src/utils/constants';
 
 const CategoryDetails: React.FC = () => {
   return (
-    <CurrentLayout>
+    <Fragment>
       <section className='max-w-screen-xl mx-auto mt-16'>
         <div className='grid grid-cols-4 gap-7'>
           {/* filter */}
@@ -20,7 +19,7 @@ const CategoryDetails: React.FC = () => {
           </div>
         </div>
       </section>
-    </CurrentLayout>
+    </Fragment>
   );
 };
 

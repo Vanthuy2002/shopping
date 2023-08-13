@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { ProductItems } from 'src/components/Products';
 import Typography from 'src/components/Typography';
@@ -8,10 +9,12 @@ const ListProducts = ({
   label,
   tag,
   col = 4,
+  className = '',
 }: {
   label?: string;
   tag: string;
   col?: number;
+  className?: string;
 }) => {
   const navigate = useNavigate();
   return (
@@ -21,7 +24,7 @@ const ListProducts = ({
           {label}
         </Typography>
       )}
-      <div className='grid grid-cols-4 gap-5'>
+      <div className={classNames('grid grid-cols-4 gap-5', className)}>
         {Array(col)
           .fill(0)
           .map((_, index) => (

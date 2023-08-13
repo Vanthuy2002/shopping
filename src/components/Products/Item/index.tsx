@@ -14,7 +14,7 @@ const ProductItems = ({
 }: Partial<ProductItemsProps>) => {
   return (
     <div className='p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
-      <Link to={`/details/${id}`}>
+      <Link to={`/product/${id}`}>
         <img
           className='rounded-lg object-cover w-[270px] h-[200px]'
           src={image}
@@ -22,7 +22,7 @@ const ProductItems = ({
         />
       </Link>
       <div className='mt-5'>
-        <Link to={`/details/${id}`}>
+        <Link to={`/product/${id}`}>
           <Typography
             as='h5'
             className='mb-2 text-sm font-medium tracking-tight text-gray-900 dark:text-white'

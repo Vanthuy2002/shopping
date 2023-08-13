@@ -20,12 +20,12 @@ const CartItem = ({
 }: CartItemsProps) => {
   return (
     <FlexLayout className='space-x-4'>
-      <Link to={`/details/${id}`} className='flex-shrink-0'>
+      <Link to={`/product/${id}`} className='flex-shrink-0'>
         <img className='w-8 h-8 rounded-full' src={image} alt='cart' />
       </Link>
       <div className='flex-1 min-w-0'>
         <Link
-          to={`/details/${id}`}
+          to={`/product/${id}`}
           className='text-sm font-medium text-gray-900 truncate dark:text-white'
         >
           {title}
