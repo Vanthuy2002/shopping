@@ -15,11 +15,11 @@ const Routing = () => {
       <Routes>
         <Route element={<CurrentLayout />}>
           <Route path='/' element={<Home />} />
-          <Route path='register' element={<Register />} />
-          <Route path='login' element={<Login />} />
           <Route path='category/:slug' element={<CategoryDetails />} />
           <Route path='product/:id' element={<DetailsProduct />} />
         </Route>
+        <Route path='register' element={<Register />} />
+        <Route path='login' element={<Login />} />
       </Routes>
     </Suspense>
   );

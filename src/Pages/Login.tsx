@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FlexLayout from 'src/Layout/Flex';
 import WebBrand from 'src/components/Brand';
 import Typography from 'src/components/Typography';
@@ -13,6 +13,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { messValidate } from 'src/utils/constants';
 import { useState } from 'react';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from 'src/firebase/config';
+import { toast } from 'react-toastify';
 
 const { email, password, required } = messValidate;
 const schema = yup.object({
@@ -27,17 +30,25 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<LoginProps>({
     resolver: yupResolver(schema),
   });
+
+  const navigate = useNavigate();
 
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRemember(e.target.checked);
   };
 
-  const handleLogin = (values: LoginProps) => {
-    console.log({ ...values, remember });
+  const handleLogin = async (values: LoginProps) => {
+    try {
+      await signInWithEmailAndPassword(auth, values.email, values.password);
+      toast.success('Login successfully!!');
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -104,7 +115,11 @@ const Login = () => {
                   Forgot password?
                 </Link>
               </FlexLayout>
-              <Button customClass='w-full'>Login</Button>
+
+              <Button disabled={isSubmitting} customstyles='w-full'>
+                Login
+              </Button>
+
               <Typography
                 as='p'
                 className='text-sm font-light text-gray-500 dark:text-gray-400'

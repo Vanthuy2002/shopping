@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Label from '../modules/Label';
 import Input from '../modules/Input';
 import FlexLayout from 'src/Layout/Flex';
@@ -11,7 +11,17 @@ import FormErr from 'src/modules/Form/FormErr';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { messValidate, regexPassword } from 'src/utils/constants';
+import {
+  imagesPlaceholder,
+  messValidate,
+  regexPassword,
+  roleUser,
+  userStatus,
+} from 'src/utils/constants';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth, db } from 'src/firebase/config';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { toast } from 'react-toastify';
 
 const { email, password, required, regexMess, checkboxMess } = messValidate;
 const schema = yup.object({
@@ -27,14 +37,41 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<RegisterData>({
     resolver: yupResolver(schema),
   });
 
-  const handleRegister = (values: RegisterData) => {
-    console.log(values);
+  const navigate = useNavigate();
+
+  const handleRegister = async (values: RegisterData) => {
+    try {
+      await createUserWithEmailAndPassword(auth, values.email, values.password);
+
+      if (auth.currentUser) {
+        await updateProfile(auth.currentUser, {
+          displayName: values.username,
+          photoURL: imagesPlaceholder,
+        });
+      } else {
+        toast.warn('Can not update profile user');
+      }
+
+      const userRef = collection(db, 'user');
+      await addDoc(userRef, {
+        ...values,
+        status: userStatus.ACTIVE,
+        role: roleUser.USER,
+        createdAt: serverTimestamp(),
+      });
+
+      toast.success('Create user successfully!!');
+      navigate('/');
+    } catch (error: unknown) {
+      console.log(error);
+    }
   };
+
   return (
     <section className='bg-gray-50 dark:bg-gray-900'>
       <FlexLayout className='flex-col justify-center px-6 py-8 mx-auto md:h-screen lg:py-0'>
@@ -103,7 +140,9 @@ const Register = () => {
                 </div>
               </FlexLayout>
 
-              <Button customClass='w-full'>Create an account</Button>
+              <Button disabled={isSubmitting} customstyles='w-full'>
+                Create an account
+              </Button>
 
               <Typography
                 as='p'

@@ -4,6 +4,7 @@ import { useToggle, useOnClickOutside } from 'usehooks-ts';
 import CartItem from './Item';
 import { createUUID } from 'src/utils/constants';
 import { useRef } from 'react';
+import Typography from '../Typography';
 
 const CartProducts = () => {
   const [show, toggle, setShow] = useToggle(false);
@@ -23,6 +24,9 @@ const CartProducts = () => {
 
       {show && (
         <div className='absolute z-10 min-w-[400px] min-h-[400px] bg-white rounded-lg shadow -translate-x-[80%] w-60 dark:bg-gray-700'>
+          <Typography as='h2' className='p-3 font-bold text-xl'>
+            My Cart
+          </Typography>
           <FormControl className='p-3'>
             <Input placeholder='Search cart...' />
           </FormControl>

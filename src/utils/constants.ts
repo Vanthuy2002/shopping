@@ -1,6 +1,8 @@
 import {
   FormValidateProps,
   ProductItemsProps,
+  RoleProps,
+  UserStatusProps,
   contactsListProps,
 } from './types';
 
@@ -30,4 +32,16 @@ export const fakeData: ProductItemsProps = {
   desc: 'Lorem ipsum dolor sit amet.',
   image: imagesPlaceholder,
   price: randomPrice,
+};
+
+export const roleUser: RoleProps = {
+  ADMIN: 'Admin',
+  SELLER: 'Seller',
+  USER: 'User',
+};
+
+export const userStatus: UserStatusProps = {
+  ACTIVE: 'Active',
+  PENDING: 'Pending',
+  BANNER: 'Banner',
 };

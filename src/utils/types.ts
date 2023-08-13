@@ -40,3 +40,16 @@ export interface FormValidateProps {
 }
 
 export type IEvents = React.ChangeEvent<HTMLInputElement>;
+
+export interface RoleProps {
+  USER: string;
+  ADMIN: string;
+  SELLER: string;
+}
+
+// defined user status type
+export interface UserStatusProps {
+  ACTIVE: string;
+  PENDING: string;
+  BANNER: string;
+}
