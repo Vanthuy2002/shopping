@@ -40,7 +40,7 @@ const ProductItems = ({
         <Rating star={5} />
 
         <FlexLayout className='justify-between mt-2'>
-          <Typography as='h3' className='text-lg font-semibold'>
+          <Typography as='h3' className='text-lg font-semibold dark:text-white'>
             {price} USD
           </Typography>
           <Button variant='secondary'>Add to cart</Button>

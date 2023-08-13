@@ -22,10 +22,12 @@ export const regexPassword = /^[a-zA-Z0-9\s]*$/;
 export const createUUID = () => crypto.randomUUID();
 const randomPrice = (Math.random() * 10).toFixed(2);
 
+export const imagesPlaceholder = 'https://placehold.co/600x400?text=Products';
+
 export const fakeData: ProductItemsProps = {
   id: createUUID(),
   title: 'Product title',
   desc: 'Lorem ipsum dolor sit amet.',
-  image: 'https://source.unsplash.com/random',
+  image: imagesPlaceholder,
   price: randomPrice,
 };
