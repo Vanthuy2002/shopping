@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <Fragment>
       <ListProducts tag='smartphones' label='Best Selling Products' />
-      <ListProducts tag='skincare' label='Best For Famers' />
+      <ListProducts tag='skincare' label='Best For Skincare' />
     </Fragment>
   );
 };
