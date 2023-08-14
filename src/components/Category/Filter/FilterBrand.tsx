@@ -18,8 +18,6 @@ const FilterBrand: React.FC = () => {
     }
   };
 
-  console.log('🚀 ~ rating:', rating);
-
   return (
     <div className='w-full'>
       <Typography as='h2' className='mb-4 text-lg font-semibold'>

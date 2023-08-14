@@ -1,5 +1,6 @@
 import {
   FormValidateProps,
+  PriceConvert,
   ProductItemsProps,
   RoleProps,
   UserStatusProps,
@@ -25,6 +26,17 @@ export const createUUID = () => crypto.randomUUID();
 const randomPrice = (Math.random() * 10).toFixed(2);
 
 export const imagesPlaceholder = 'https://placehold.co/600x400?text=Products';
+
+export const getNewPrice = (
+  oldPrice: PriceConvert,
+  discount?: PriceConvert
+): PriceConvert => {
+  if (oldPrice && discount) {
+    const newPrice = oldPrice - discount;
+    return newPrice;
+  }
+  return oldPrice;
+};
 
 export const fakeData: ProductItemsProps = {
   id: createUUID(),

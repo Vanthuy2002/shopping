@@ -1,8 +1,8 @@
 import Typography from 'src/components/Typography';
 
 interface PriceProps {
-  oldPrice?: number;
-  newPrice: number;
+  oldPrice?: number | undefined;
+  newPrice: number | undefined;
 }
 
 const PriceDetails = ({ oldPrice, newPrice }: PriceProps) => {

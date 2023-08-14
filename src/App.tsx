@@ -9,11 +9,7 @@ function App() {
   const setUser = useAppStore((state) => state.setUser);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(null);
-      }
+      user ? setUser(user) : setUser(null);
     });
     return () => unsubscribe();
   }, [setUser]);

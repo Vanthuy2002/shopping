@@ -1,6 +1,6 @@
 import FlexLayout from 'src/Layout/Flex';
 
-const Rating = ({ star }: { star: number }) => {
+const Rating = ({ star }: { star: number | undefined }) => {
   return (
     <FlexLayout className='flex items-center space-x-1'>
       {Array(star)

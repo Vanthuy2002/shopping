@@ -1,9 +1,19 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { Fragment } from 'react';
+import { useParams } from 'react-router-dom';
 import { FilterBrand } from 'src/components/Category/Filter';
 import { ProductItems } from 'src/components/Products';
-import { fakeData } from 'src/utils/constants';
+import Seleton from 'src/modules/Effect/Seleton';
+import { getProductsByCategories } from 'src/services/products.sevice';
 
 const CategoryDetails: React.FC = () => {
+  const { slug } = useParams();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['products', slug],
+    queryFn: () => getProductsByCategories(slug as string, 10),
+  });
+
   return (
     <Fragment>
       <section className='max-w-screen-xl mx-auto mt-16'>
@@ -11,11 +21,20 @@ const CategoryDetails: React.FC = () => {
           {/* filter */}
           <FilterBrand />
           <div className='grid grid-cols-3 col-start-2 col-end-5 gap-8'>
-            {Array(9)
-              .fill(0)
-              .map((_, index) => (
-                <ProductItems key={index} {...fakeData} />
-              ))}
+            {isLoading ? (
+              <Fragment>
+                <Seleton />
+                <Seleton />
+                <Seleton />
+              </Fragment>
+            ) : (
+              <Fragment>
+                {data &&
+                  data.map((product) => (
+                    <ProductItems key={product.id} item={product} />
+                  ))}
+              </Fragment>
+            )}
           </div>
         </div>
       </section>

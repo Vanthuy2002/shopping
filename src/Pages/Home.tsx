@@ -4,8 +4,8 @@ import ListProducts from 'src/components/Products/List';
 const Home = () => {
   return (
     <Fragment>
-      <ListProducts tag='selling' label='Best Selling Products' />
-      <ListProducts tag='farmer' label='Best For Farmer' />
+      <ListProducts tag='smartphones' label='Best Selling Products' />
+      <ListProducts tag='skincare' label='Best For Famers' />
     </Fragment>
   );
 };

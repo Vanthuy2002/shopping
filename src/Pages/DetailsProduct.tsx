@@ -4,44 +4,58 @@ import PriceDetails from 'src/components/Products/Detail/Price';
 import Rating from 'src/components/Rating';
 import Typography from 'src/components/Typography';
 import Button from 'src/modules/Button';
-import { fakeData, imagesPlaceholder } from 'src/utils/constants';
-import { ProductItems } from 'src/components/Products';
+import { getNewPrice } from 'src/utils/constants';
+import { useQuery } from '@tanstack/react-query';
+import { getSingleProduct } from 'src/services/products.sevice';
+import { Fragment } from 'react';
+import Seleton from 'src/modules/Effect/Seleton';
+import { useParams } from 'react-router-dom';
 
 const DetailsProduct = () => {
+  const { id } = useParams();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ['details', id],
+    queryFn: () => getSingleProduct(Number(id)),
+  });
+
   return (
     <section className='max-w-screen-xl mx-auto mt-16'>
       <div className='grid grid-cols-2 gap-8'>
         {/* images */}
         <div className='flex flex-col gap-y-8 w-full'>
-          {Array(3)
-            .fill(0)
-            .map((_, index) => (
-              <img
-                key={index}
-                src={imagesPlaceholder}
-                alt='products'
-                className='w-full h-[436px] object-cover rounded-xl'
-              />
-            ))}
+          {data &&
+            data?.images &&
+            data.images
+              .slice(0, 3)
+              .map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={data.title}
+                  className='w-full h-[436px] object-cover rounded-xl'
+                />
+              ))}
         </div>
 
         {/* artice */}
         <article>
           <Typography className='font-semibold text-[32px] mb-2'>
-            Carrots from Tomissy Farm
+            {data?.title}
           </Typography>
 
-          <Rating star={4} />
+          <Rating star={data && Math.floor(data.rating)} />
 
           <Typography as='p' className='my-10'>
-            Carrots from Tomissy Farm are one of the best on the market. Tomisso
-            and his family are giving a full love to his Bio products. Tomisso’s
-            carrots are growing on the fields naturally.
+            {data?.description}
           </Typography>
 
           {/* infomations */}
           <FlexLayout className='justify-between'>
-            <PriceDetails newPrice={36.5} oldPrice={43.2} />
+            <PriceDetails
+              newPrice={getNewPrice(data?.price, data?.discountPercentage)}
+              oldPrice={data?.price}
+            />
             <CountProducts />
             <Button variant='secondary'>Add to cart</Button>
           </FlexLayout>
@@ -51,11 +65,16 @@ const DetailsProduct = () => {
             Related Products
           </Typography>
           <div className='grid grid-cols-2 gap-8'>
-            {Array(4)
-              .fill(0)
-              .map((_, index) => (
-                <ProductItems {...fakeData} key={index} />
-              ))}
+            {isLoading ? (
+              <Fragment>
+                <Seleton />
+                <Seleton />
+                <Seleton />
+                <Seleton />
+              </Fragment>
+            ) : (
+              <Fragment></Fragment>
+            )}
           </div>
         </article>
       </div>
