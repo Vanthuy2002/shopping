@@ -12,10 +12,11 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { messValidate } from 'src/utils/constants';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from 'src/firebase/config';
 import { toast } from 'react-toastify';
+import { useAppStore } from 'src/store';
 
 const { email, password, required } = messValidate;
 const schema = yup.object({
@@ -26,7 +27,9 @@ const schema = yup.object({
 type LoginProps = yup.InferType<typeof schema>;
 
 const Login = () => {
-  const [remember, setRemember] = useState<boolean>(false);
+  const [showPass, setShowPass] = useState<boolean>(false);
+  const user = useAppStore((state) => state.users);
+
   const {
     register,
     handleSubmit,
@@ -38,7 +41,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRemember(e.target.checked);
+    setShowPass(e.target.checked);
   };
 
   const handleLogin = async (values: LoginProps) => {
@@ -50,6 +53,12 @@ const Login = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (user && user.uid) {
+      navigate('/');
+    }
+  }, [navigate, user]);
 
   return (
     <section className='bg-gray-50 dark:bg-gray-900'>
@@ -83,6 +92,7 @@ const Login = () => {
               <FormControl>
                 <Label name='password'>Your Password</Label>
                 <Input
+                  type={showPass ? 'text' : 'password'}
                   id='password'
                   {...register('password')}
                   placeholder='Enter your password...'
@@ -96,14 +106,14 @@ const Login = () => {
                 <div className='flex items-start'>
                   <FlexLayout className='h-5'>
                     <Checkbox
-                      id='remember'
-                      checked={remember}
+                      id='showPass'
+                      checked={showPass}
                       onChange={handleCheck}
                     />
                   </FlexLayout>
                   <div className='ml-3 text-sm'>
-                    <Label name='remember' className='select-none'>
-                      Remember me
+                    <Label name='showPass' className='select-none'>
+                      Show Password
                     </Label>
                   </div>
                 </div>

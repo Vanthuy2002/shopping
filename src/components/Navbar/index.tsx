@@ -8,11 +8,13 @@ import { useNavigate } from 'react-router-dom';
 import { useToggle } from 'usehooks-ts';
 import classNames from 'classnames';
 import CartProducts from '../Cart';
+import { useAppStore } from 'src/store';
 
-const isLogin = false;
 const Navbar = () => {
   const navigate = useNavigate();
   const [show, toggle] = useToggle(false);
+
+  const user = useAppStore((state) => state.users);
 
   return (
     <nav className='bg-white border-gray-200 dark:bg-gray-900'>
@@ -20,10 +22,10 @@ const Navbar = () => {
         <WebBrand />
 
         <FlexLayout className='md:order-2'>
-          {isLogin ? (
+          {user?.email ? (
             <FlexLayout className='gap-8'>
               <CartProducts />
-              <User />
+              <User user={user} />
             </FlexLayout>
           ) : (
             <Button onClick={() => navigate('/register')}>Get Started</Button>
