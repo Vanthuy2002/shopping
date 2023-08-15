@@ -23,7 +23,8 @@ export const regexPassword = /^[a-zA-Z0-9\s]*$/;
 
 export const createUUID = () => crypto.randomUUID();
 
-export const imagesPlaceholder = 'https://placehold.co/600x400?text=Products';
+export const imagesPlaceholder =
+  'https://bootdey.com/img/Content/avatar/avatar1.png';
 
 export const getNewPrice = (
   oldPrice: PriceConvert,

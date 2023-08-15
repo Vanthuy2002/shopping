@@ -7,7 +7,7 @@ export interface contactsListProps {
   link: string[];
 }
 
-type HTMLHeadingTag = Extract<
+export type HTMLHeadingTag = Extract<
   keyof JSX.IntrinsicElements,
   'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'span'
 >;
