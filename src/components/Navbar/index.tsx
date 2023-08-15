@@ -21,7 +21,7 @@ const Navbar = () => {
       <FlexLayout className='flex-wrap justify-between max-w-screen-xl p-4 mx-auto'>
         <WebBrand />
 
-        <FlexLayout className='md:order-2'>
+        <FlexLayout className='md:order-2 gap-x-2'>
           {user?.email ? (
             <FlexLayout className='gap-8'>
               <CartProducts />

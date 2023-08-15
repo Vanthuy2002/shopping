@@ -17,7 +17,7 @@ const TagsProducts = () => {
           <Link
             key={createUUID()}
             to={`/category/${item}`}
-            className='bg-blue-100 text-blue-800 text-sm font-medium px-2.5 py-1 rounded-full dark:bg-blue-900 dark:text-blue-300'
+            className='px-4 py-2 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300'
           >
             {capitalize(item)}
           </Link>
