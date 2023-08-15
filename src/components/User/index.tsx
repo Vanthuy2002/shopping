@@ -19,7 +19,7 @@ interface UserProps {
 
 const options: optionsUsers[] = [
   { id: 1, title: 'Dashboard', to: '/dashboard' },
-  { id: 2, title: 'Profile', to: '/profile' },
+  { id: 2, title: 'Profile', to: 'me/profile' },
   { id: 3, title: 'Settings', to: '/setting' },
 ];
 

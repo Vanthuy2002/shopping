@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import CurrentLayout from 'src/Layout';
+import Profile from 'src/Pages/Profile';
 import Loading from 'src/modules/Effect';
 
 const Home = lazy(() => import('src/Pages/Home'));
@@ -22,6 +23,7 @@ const Routing = () => {
         </Route>
         <Route path='register' element={<Register />} />
         <Route path='login' element={<Login />} />
+        <Route path='me/profile' element={<Profile />} />
       </Routes>
     </Suspense>
   );

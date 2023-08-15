@@ -35,7 +35,7 @@ const DetailsProduct = () => {
     <section className='max-w-screen-xl mx-auto mt-16'>
       <div className='grid grid-cols-2 gap-8'>
         {/* images */}
-        <div className='flex flex-col gap-y-8 w-full'>
+        <div className='flex flex-col w-full gap-y-8'>
           {isLoading ? (
             <Fragment>
               <Seleton onlyImage />
@@ -85,7 +85,7 @@ const DetailsProduct = () => {
           </FlexLayout>
 
           {/* relate products */}
-          <Typography as='p' className='font-semibold text-lg my-8'>
+          <Typography as='p' className='my-8 text-lg font-semibold'>
             Related Products
           </Typography>
           <div className='grid grid-cols-2 gap-8'>
