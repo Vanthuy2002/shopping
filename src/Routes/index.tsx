@@ -6,8 +6,9 @@ import Loading from 'src/modules/Effect';
 const Home = lazy(() => import('src/Pages/Home'));
 const Register = lazy(() => import('src/Pages/Register'));
 const Login = lazy(() => import('src/Pages/Login'));
-const CategoryDetails = lazy(() => import('src/Pages/Category'));
+const CategoryDetails = lazy(() => import('src/Pages/CategoryDetail'));
 const DetailsProduct = lazy(() => import('src/Pages/DetailsProduct'));
+const Category = lazy(() => import('src/Pages/Category'));
 
 const Routing = () => {
   return (
@@ -15,6 +16,7 @@ const Routing = () => {
       <Routes>
         <Route element={<CurrentLayout />}>
           <Route path='/' element={<Home />} />
+          <Route path='category' element={<Category />} />
           <Route path='category/:slug' element={<CategoryDetails />} />
           <Route path='product/:id' element={<DetailsProduct />} />
         </Route>

@@ -12,4 +12,10 @@ const getSingleProduct = async (id: number) => {
   return res.data;
 };
 
-export { getProductsByCategories, getSingleProduct };
+const getAllCategory = async () => {
+  const res = await api.get<string[]>(`/products/categories`);
+  const listCategory = res.data;
+  return listCategory;
+};
+
+export { getProductsByCategories, getSingleProduct, getAllCategory };

@@ -1,7 +1,6 @@
 import {
   FormValidateProps,
   PriceConvert,
-  ProductItemsProps,
   RoleProps,
   UserStatusProps,
   contactsListProps,
@@ -23,7 +22,6 @@ export const messValidate: FormValidateProps = {
 export const regexPassword = /^[a-zA-Z0-9\s]*$/;
 
 export const createUUID = () => crypto.randomUUID();
-const randomPrice = (Math.random() * 10).toFixed(2);
 
 export const imagesPlaceholder = 'https://placehold.co/600x400?text=Products';
 
@@ -38,12 +36,10 @@ export const getNewPrice = (
   return oldPrice;
 };
 
-export const fakeData: ProductItemsProps = {
-  id: createUUID(),
-  title: 'Product title',
-  desc: 'Lorem ipsum dolor sit amet.',
-  image: imagesPlaceholder,
-  price: randomPrice,
+export const capitalize = (word: string): string => {
+  const newCharacter =
+    word.charAt(0).toUpperCase() + word.slice(1).replace(/-/g, ' ');
+  return newCharacter;
 };
 
 export const roleUser: RoleProps = {

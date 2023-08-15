@@ -22,7 +22,7 @@ const ProductItems = ({ item }: ItemProducts) => {
   } = item;
 
   return (
-    <FlexLayout className='p-4 flex-col bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
+    <FlexLayout className='flex-col p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
       <Link className='flex-shrink-0' to={`/product/${id}`}>
         <img
           className='rounded-lg object-cover w-[270px] h-[200px]'
@@ -30,8 +30,8 @@ const ProductItems = ({ item }: ItemProducts) => {
           alt={title}
         />
       </Link>
-      <div className='mt-5 flex flex-col flex-1'>
-        <Link to={`/product/$${id}`}>
+      <div className='flex flex-col flex-1 mt-5'>
+        <Link to={`/product/${id}`}>
           <Typography
             as='h5'
             className='mb-2 text-sm font-medium tracking-tight text-gray-900 dark:text-white'
@@ -41,7 +41,7 @@ const ProductItems = ({ item }: ItemProducts) => {
         </Link>
         <Typography
           as='p'
-          className='mb-3 text-xs text-over text-gray-500 dark:text-gray-400'
+          className='mb-3 text-xs text-gray-500 text-over dark:text-gray-400'
         >
           {description}
         </Typography>

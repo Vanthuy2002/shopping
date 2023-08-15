@@ -6,6 +6,7 @@ const Home = () => {
     <Fragment>
       <ListProducts tag='smartphones' label='Best Selling Products' />
       <ListProducts tag='skincare' label='Best For Skincare' />
+      <ListProducts tag='womens-dresses' label='For Womens' />
     </Fragment>
   );
 };
