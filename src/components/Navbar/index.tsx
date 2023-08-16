@@ -9,27 +9,37 @@ import { useToggle } from 'usehooks-ts';
 import classNames from 'classnames';
 import CartProducts from '../Cart';
 import { useAppStore } from 'src/store';
+import Toggle from 'src/modules/Checkbox/Toggle';
+import { IEvents } from 'src/utils/types';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [show, toggle] = useToggle(false);
 
   const user = useAppStore((state) => state.users);
+  const toggleTheme = useAppStore((state) => state.toggleTheme);
+
+  const handleToggle = (e: IEvents) => {
+    toggleTheme(e.target.checked);
+  };
 
   return (
-    <nav className='bg-white border-gray-200 dark:bg-gray-900'>
+    <nav className='h-20 bg-white border-gray-200 dark:bg-gray-900'>
       <FlexLayout className='flex-wrap justify-between max-w-screen-xl p-4 mx-auto'>
         <WebBrand />
 
         <FlexLayout className='md:order-2 gap-x-2'>
-          {user?.email ? (
-            <FlexLayout className='gap-8'>
-              <CartProducts />
-              <User user={user} />
-            </FlexLayout>
-          ) : (
-            <Button onClick={() => navigate('/register')}>Get Started</Button>
-          )}
+          <FlexLayout className='gap-8'>
+            <Toggle onChange={handleToggle} text='Theme'></Toggle>
+            {user?.email ? (
+              <>
+                <CartProducts />
+                <User user={user} />
+              </>
+            ) : (
+              <Button onClick={() => navigate('/register')}>Get Started</Button>
+            )}
+          </FlexLayout>
 
           <Button customstyles='md:hidden' variant='light' onClick={toggle}>
             {show ? (

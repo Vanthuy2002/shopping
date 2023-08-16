@@ -14,17 +14,17 @@ const CartProducts = () => {
   useOnClickOutside(ref, handleCLickOut);
 
   return (
-    <section ref={ref} className='relative p-2 '>
-      <img
-        src='/cart.svg'
-        alt='cart'
+    <section ref={ref} className='relative'>
+      <span
         onClick={toggle}
-        className='object-cover w-6 h-6 cursor-pointer'
-      />
+        className='inline-flex items-center justify-center w-10 h-10 bg-white rounded-full cursor-pointer'
+      >
+        <img src='/cart.svg' alt='' className='object-cover w-6 h-6' />
+      </span>
 
       {show && (
-        <div className='absolute z-10 min-w-[400px] min-h-[400px] bg-white rounded-lg shadow -translate-x-[80%] w-60 dark:bg-gray-700'>
-          <Typography as='h2' className='p-3 font-bold text-xl'>
+        <div className='absolute z-10 min-w-[400px] min-h-[400px] bg-white rounded-lg shadow -translate-x-[80%] translate-y-4 w-60 dark:bg-gray-700'>
+          <Typography as='h2' className='p-3 text-xl font-bold dark:text-white'>
             My Cart
           </Typography>
           <FormControl className='p-3'>

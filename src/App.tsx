@@ -8,6 +8,15 @@ import Toasty from './Layout/Noti';
 
 function App() {
   const setUser = useAppStore((state) => state.setUser);
+  const theme = useAppStore((state) => state.theme);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    theme === 'dark'
+      ? html.classList.add('dark')
+      : html.classList.remove('dark');
+  }, [theme]);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       user ? setUser(user) : setUser(null);

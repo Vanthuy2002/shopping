@@ -23,21 +23,20 @@ const FilterBrand: React.FC = () => {
       <Typography as='h2' className='mb-4 text-lg font-semibold'>
         Ratings
       </Typography>
-      {Array(5)
-        .fill(0)
-        .map((_, index) => (
-          <FlexLayout
-            key={index}
-            className='flex-col-reverse !items-start gap-2'
-          >
-            <Toggle
-              onChange={handleChangeRating}
-              name='brand'
-              value={index + 1}
-              text={<Rating star={index + 1} />}
-            />
-          </FlexLayout>
-        ))}
+      <FlexLayout className='flex-col-reverse !items-start gap-y-4'>
+        {Array(5)
+          .fill(0)
+          .map((_, index) => (
+            <FlexLayout key={index} className='flex-col !items-start'>
+              <Toggle
+                onChange={handleChangeRating}
+                name='brand'
+                value={index + 1}
+                text={<Rating star={index + 1} />}
+              />
+            </FlexLayout>
+          ))}
+      </FlexLayout>
     </div>
   );
 };
