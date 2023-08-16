@@ -22,15 +22,6 @@ export interface FlexProps {
   gap: string | number;
   className: string;
 }
-
-export interface ProductItemsProps {
-  id: string;
-  title: string;
-  desc: string;
-  image: string;
-  price: number | string;
-}
-
 export interface FormValidateProps {
   required: string;
   email: string;
@@ -40,6 +31,9 @@ export interface FormValidateProps {
 }
 
 export type IEvents = React.ChangeEvent<HTMLInputElement>;
+export type IEventAllTags = React.ChangeEvent<
+  HTMLInputElement | HTMLTextAreaElement
+>;
 
 export interface RoleProps {
   USER: string;
@@ -53,6 +47,23 @@ export interface UserStatusProps {
   PENDING: string;
   BANNER: string;
 }
+
+export type UserUpdate = {
+  id: string;
+  email: string;
+  password: string;
+  terms: boolean;
+  username: string;
+  firstName: string;
+  lastname: string;
+  phone: string;
+  addr: string;
+  newpassword: string;
+  confirm: string;
+  desc: string;
+  imageStore: string;
+} & RoleProps &
+  UserStatusProps;
 
 export interface ReponseFromApi {
   id: number;

@@ -4,6 +4,7 @@ import Routing from './Routes';
 import { useAppStore } from './store';
 import { useEffect } from 'react';
 import { auth } from './firebase/config';
+import Toasty from './Layout/Noti';
 
 function App() {
   const setUser = useAppStore((state) => state.setUser);
@@ -17,6 +18,7 @@ function App() {
   return (
     <main className='App'>
       <Routing />
+      <Toasty />
     </main>
   );
 }

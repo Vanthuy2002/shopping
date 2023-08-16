@@ -1,11 +1,10 @@
+/* eslint-disable no-unused-vars */
 import { User } from 'firebase/auth';
 import { create } from 'zustand';
 
 type UserProps = User | null;
-
 interface AppStoreProps {
   users: UserProps;
-  // eslint-disable-next-line no-unused-vars
   setUser: (user: UserProps) => void;
 }
 

@@ -2,7 +2,6 @@ import Header from './Header';
 import { Fragment } from 'react';
 import Footer from './Footer';
 import { Outlet } from 'react-router-dom';
-import Toasty from './Noti';
 
 const CurrentLayout = () => {
   return (
@@ -10,7 +9,6 @@ const CurrentLayout = () => {
       <Header />
       <Outlet />
       <Footer />
-      <Toasty />
     </Fragment>
   );
 };
