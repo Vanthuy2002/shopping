@@ -54,7 +54,7 @@ export type UserUpdate = {
   password: string;
   terms: boolean;
   username: string;
-  firstName: string;
+  firstname: string;
   lastname: string;
   phone: string;
   addr: string;

@@ -61,7 +61,7 @@ const Register = () => {
       await addDoc(userRef, {
         ...values,
         status: userStatus.ACTIVE,
-        role: roleUser.USER,
+        role: [roleUser.USER],
         createdAt: serverTimestamp(),
       });
 

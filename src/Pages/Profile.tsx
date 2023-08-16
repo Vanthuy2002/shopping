@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import TextArea from 'src/modules/TextArea';
 import Label from 'src/modules/Label';
 import Input from 'src/modules/Input';
@@ -9,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppStore } from 'src/store';
 import { IEventAllTags, UserUpdate } from 'src/utils/types';
 import { FormControl } from 'src/modules/Form';
-import { db } from 'src/firebase/config';
+import { auth, db } from 'src/firebase/config';
 import {
   collection,
   doc,
@@ -19,6 +20,7 @@ import {
   where,
 } from 'firebase/firestore';
 import { toast } from 'react-toastify';
+import { updateProfile } from 'firebase/auth';
 
 type OptionalUser = Partial<UserUpdate>;
 
@@ -32,7 +34,7 @@ const Profile = () => {
   const getUserInDb = async () => {
     const docRef = query(
       collection(db, 'user'),
-      where('email', '==', user?.email)
+      where('email', '==', user?.email as string)
     );
     const querySnapshot = await getDocs(docRef);
     querySnapshot.forEach((doc) => {
@@ -41,10 +43,9 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    if (user && user.email) {
+    if (user && user.uid) {
       getUserInDb();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {
@@ -65,6 +66,13 @@ const Profile = () => {
     try {
       const docRef = doc(db, 'user', userInfo?.id as string);
       await updateDoc(docRef, { ...userInfo });
+
+      if (auth.currentUser) {
+        await updateProfile(auth.currentUser, {
+          displayName: userInfo.username,
+          photoURL: userInfo.imageStore,
+        });
+      }
       toast.success('Update user successfully!!');
       setIsSubmit(false);
     } catch (error) {
@@ -82,7 +90,7 @@ const Profile = () => {
               <img
                 src={userInfo.imageStore || (user?.photoURL as string)}
                 className='object-cover w-full h-full rounded-full'
-                alt={user?.displayName as string}
+                alt={userInfo.username}
               />
             </div>
             <FileUpload setPath={setImagePath} />
@@ -111,7 +119,7 @@ const Profile = () => {
                   name='firstname'
                   id='first'
                   onChange={handleChange}
-                  value={userInfo.firstName}
+                  value={userInfo.firstname}
                   placeholder='Your firstname...'
                 />
               </FormControl>
@@ -152,6 +160,7 @@ const Profile = () => {
               <FormControl className='col-start-1 col-end-3'>
                 <Label name='email'>Your email</Label>
                 <Input
+                  readOnly
                   name='email'
                   id='email'
                   onChange={handleChange}
@@ -167,7 +176,7 @@ const Profile = () => {
                   id='new'
                   type='password'
                   onChange={handleChange}
-                  value={userInfo.newpassword}
+                  defaultValue=''
                   placeholder='Enter your password...'
                 />
               </FormControl>
@@ -178,7 +187,7 @@ const Profile = () => {
                   name='confirm'
                   id='confirm'
                   onChange={handleChange}
-                  value={userInfo.confirm}
+                  defaultValue=''
                   placeholder='Enter again your password...'
                 />
               </FormControl>

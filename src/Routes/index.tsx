@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import CurrentLayout from 'src/Layout';
-import Profile from 'src/Pages/Profile';
 import Loading from 'src/modules/Effect';
 
 const Home = lazy(() => import('src/Pages/Home'));
@@ -10,6 +9,7 @@ const Login = lazy(() => import('src/Pages/Login'));
 const CategoryDetails = lazy(() => import('src/Pages/CategoryDetail'));
 const DetailsProduct = lazy(() => import('src/Pages/DetailsProduct'));
 const Category = lazy(() => import('src/Pages/Category'));
+const Profile = lazy(() => import('src/Pages/Profile'));
 
 const Routing = () => {
   return (

@@ -1,32 +1,32 @@
 import { IEvents } from 'src/utils/types';
-import { useState, Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import Label from '../Label';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject,
+} from 'firebase/storage';
 import { storage } from 'src/firebase/config';
 import { toast } from 'react-toastify';
 import Progress from '../Effect/Progress';
 import Button from '../Button';
-
-type ImageUpload = {
-  isUploading: boolean;
-  progress: number;
-};
+import { useForm } from 'react-hook-form';
 
 const FileUpload = ({
   setPath,
 }: {
   setPath: React.Dispatch<React.SetStateAction<string>>;
 }) => {
-  const [imageUpload, setImageUpload] = useState<ImageUpload>({
-    isUploading: false,
-    progress: 0,
-  });
   const metadata = {
-    contentType: 'image/jpeg',
+    contentType: 'image/jpg',
   };
+  const [isUpload, setIsUpload] = useState<boolean>(false);
+  const [progress, setProgress] = useState<number>(0);
+  const { setValue, getValues } = useForm();
 
   const handleUploadImage = (file: File) => {
-    setImageUpload({ ...imageUpload, isUploading: true });
+    setIsUpload(true);
     const storageRef = ref(storage, 'avatar/' + file?.name);
     const uploadTask = uploadBytesResumable(storageRef, file, metadata);
 
@@ -35,7 +35,7 @@ const FileUpload = ({
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        setImageUpload({ ...imageUpload, progress: progress });
+        setProgress(progress);
         switch (snapshot.state) {
           case 'paused':
             console.log('Upload is paused');
@@ -52,7 +52,6 @@ const FileUpload = ({
             break;
           case 'storage/canceled':
             toast.error(error.message);
-
             break;
 
           case 'storage/unknown':
@@ -63,7 +62,7 @@ const FileUpload = ({
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           setPath(downloadURL);
-          setImageUpload({ ...imageUpload, isUploading: false });
+          setIsUpload(false);
         });
       }
     );
@@ -72,29 +71,46 @@ const FileUpload = ({
   const handleChangeImage = (e: IEvents) => {
     const file = e.target.files && e.target.files[0];
     handleUploadImage(file as File);
+    setValue('avatars', file?.name);
+  };
+
+  const handleRemoveImage = () => {
+    const imageRef = ref(storage, `avatar/${getValues('avatars')}`);
+    deleteObject(imageRef)
+      .then(() => {
+        toast.success('Delete file successfully');
+        setPath('');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
     <Fragment>
-      {imageUpload.isUploading ? (
+      {isUpload ? (
         <Fragment>
-          <Progress width={imageUpload.progress} />
-          <Button variant='remove'>Remover</Button>
+          <Progress progress={progress} />
         </Fragment>
       ) : (
-        <Label
-          name='upload'
-          className='text-white inline-block cursor-pointer my-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5'
-        >
-          <input
-            hidden
-            id='upload'
-            onChange={handleChangeImage}
+        <Fragment>
+          <Label
             name='upload'
-            type='file'
-          ></input>
-          Upload Image
-        </Label>
+            className='text-white mr-3 inline-block cursor-pointer my-5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5'
+          >
+            <input
+              hidden
+              id='upload'
+              onChange={handleChangeImage}
+              name='upload'
+              type='file'
+            ></input>
+            Upload Image
+          </Label>
+          <Button onClick={handleRemoveImage} variant='remove'>
+            Remove
+          </Button>
+        </Fragment>
       )}
     </Fragment>
   );
