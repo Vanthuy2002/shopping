@@ -56,7 +56,9 @@ const ProductItems = ({ item }: ItemProducts) => {
             >
               {getNewPrice(price, discountPercentage)} USD
             </Typography>
-            <Button variant='secondary'>Add to cart</Button>
+            <Button size='lg' variant='secondary'>
+              Add to cart
+            </Button>
           </FlexLayout>
         </div>
       </div>

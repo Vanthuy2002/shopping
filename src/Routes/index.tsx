@@ -5,15 +5,16 @@ import CurrentLayout from 'src/Layout';
 import { auth } from 'src/firebase/config';
 import Loading from 'src/modules/Effect';
 import { useAppStore } from 'src/store';
+import Login from 'src/Pages/Login';
+import Register from 'src/Pages/Register';
 
 const Home = lazy(() => import('src/Pages/Home'));
-const Register = lazy(() => import('src/Pages/Register'));
-const Login = lazy(() => import('src/Pages/Login'));
 const CategoryDetails = lazy(() => import('src/Pages/CategoryDetail'));
 const DetailsProduct = lazy(() => import('src/Pages/DetailsProduct'));
 const Category = lazy(() => import('src/Pages/Category'));
 const Profile = lazy(() => import('src/Pages/Profile'));
 const SearchResults = lazy(() => import('src/Pages/SearchResults'));
+const CartPage = lazy(() => import('src/Pages/Cart'));
 
 const Routing = () => {
   const setUser = useAppStore((state) => state.setUser);
@@ -41,6 +42,7 @@ const Routing = () => {
           <Route path='category/:slug' element={<CategoryDetails />} />
           <Route path='product/:id' element={<DetailsProduct />} />
           <Route path='search/:slug' element={<SearchResults />} />
+          <Route path='cart' element={<CartPage />} />
         </Route>
         <Route path='register' element={<Register />} />
         <Route path='login' element={<Login />} />

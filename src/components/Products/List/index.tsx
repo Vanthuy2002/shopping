@@ -17,7 +17,7 @@ const ListProducts = ({
 }: ListProps) => {
   const { data, isLoading } = useQuery({
     queryKey: ['products', tag],
-    queryFn: () => getProductsByCategories(tag),
+    queryFn: () => getProductsByCategories(tag as string),
   });
 
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const ListProducts = ({
 
       {isButton && (
         <div className='mt-5 text-right'>
-          <Button onClick={() => navigate(`/category/${tag}`)}>
+          <Button size='lg' onClick={() => navigate(`/category/${tag}`)}>
             More Products
           </Button>
         </div>

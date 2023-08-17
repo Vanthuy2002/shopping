@@ -66,16 +66,15 @@ const Navbar = () => {
         <form
           onSubmit={handleSearch}
           className={classNames(
-            'items-center justify-between gap-2 w-full mt-5 md:mt-0 md:flex md:max-w-sm md:order-1',
+            'items-center justify-between w-full mt-5 md:mt-0 md:flex md:max-w-sm md:order-1',
             { hidden: !show }
           )}
         >
           <Input
             onChange={handleChange}
             value={query}
-            placeholder='Search something....'
+            placeholder='Search products....'
           />
-          <Button>Search</Button>
         </form>
       </FlexLayout>
     </nav>

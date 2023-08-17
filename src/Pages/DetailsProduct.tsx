@@ -81,7 +81,9 @@ const DetailsProduct = () => {
               oldPrice={data?.price}
             />
             <CountProducts />
-            <Button variant='secondary'>Add to cart</Button>
+            <Button size='lg' variant='secondary'>
+              Add to cart
+            </Button>
           </FlexLayout>
 
           {/* relate products */}
