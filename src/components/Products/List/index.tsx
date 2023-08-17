@@ -7,14 +7,14 @@ import { useQuery } from '@tanstack/react-query';
 import { getProductsByCategories } from 'src/services/products.sevice';
 import Seleton from 'src/modules/Effect/Seleton';
 import { Fragment } from 'react';
+import { ListProps } from 'src/utils/types';
 
-interface ListProps {
-  label: string;
-  tag: string;
-  className?: string;
-}
-
-const ListProducts = ({ label, tag, className = '' }: ListProps) => {
+const ListProducts = ({
+  label,
+  tag,
+  className = '',
+  isButton = true,
+}: ListProps) => {
   const { data, isLoading } = useQuery({
     queryKey: ['products', tag],
     queryFn: () => getProductsByCategories(tag),
@@ -47,11 +47,13 @@ const ListProducts = ({ label, tag, className = '' }: ListProps) => {
         )}
       </div>
 
-      <div className='mt-5 text-right'>
-        <Button onClick={() => navigate(`/category/${tag}`)}>
-          More Products
-        </Button>
-      </div>
+      {isButton && (
+        <div className='mt-5 text-right'>
+          <Button onClick={() => navigate(`/category/${tag}`)}>
+            More Products
+          </Button>
+        </div>
+      )}
     </section>
   );
 };

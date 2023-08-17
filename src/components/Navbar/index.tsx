@@ -11,16 +11,29 @@ import CartProducts from '../Cart';
 import { useAppStore } from 'src/store';
 import Toggle from 'src/modules/Checkbox/Toggle';
 import { IEvents } from 'src/utils/types';
+import { useState } from 'react';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const [show, toggle] = useToggle(false);
+  const [query, setQuery] = useState<string>('');
 
   const user = useAppStore((state) => state.users);
   const toggleTheme = useAppStore((state) => state.toggleTheme);
+  const theme = useAppStore((state) => state.theme);
 
   const handleToggle = (e: IEvents) => {
     toggleTheme(e.target.checked);
+  };
+
+  const handleChange = (e: IEvents) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate(`/search/${query}`);
+    setQuery('');
   };
 
   return (
@@ -30,7 +43,7 @@ const Navbar = () => {
 
         <FlexLayout className='md:order-2 gap-x-2'>
           <FlexLayout className='gap-8'>
-            <Toggle onChange={handleToggle} text='Theme'></Toggle>
+            <Toggle onChange={handleToggle} text={theme} />
             {user?.email ? (
               <>
                 <CartProducts />
@@ -50,14 +63,20 @@ const Navbar = () => {
           </Button>
         </FlexLayout>
 
-        <div
+        <form
+          onSubmit={handleSearch}
           className={classNames(
-            'items-center justify-between w-full mt-5 md:mt-0 md:flex md:max-w-sm md:order-1',
+            'items-center justify-between gap-2 w-full mt-5 md:mt-0 md:flex md:max-w-sm md:order-1',
             { hidden: !show }
           )}
         >
-          <Input placeholder='Search products any...' />
-        </div>
+          <Input
+            onChange={handleChange}
+            value={query}
+            placeholder='Search something....'
+          />
+          <Button>Search</Button>
+        </form>
       </FlexLayout>
     </nav>
   );

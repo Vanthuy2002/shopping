@@ -80,3 +80,10 @@ export interface ReponseFromApi {
 }
 
 export type PriceConvert = number | undefined;
+
+export interface ListProps {
+  label: string;
+  tag?: string;
+  className?: string;
+  isButton?: boolean;
+}
