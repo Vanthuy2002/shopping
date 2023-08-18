@@ -204,10 +204,14 @@ const Profile = () => {
               </FormControl>
 
               <FormControl>
-                <Button onClick={() => navigate('/')} variant='secondary'>
+                <Button
+                  size='lg'
+                  onClick={() => navigate('/')}
+                  variant='secondary'
+                >
                   Back
                 </Button>
-                <Button disabled={isSubmit} type='submit'>
+                <Button size='lg' disabled={isSubmit} type='submit'>
                   Update Profile
                 </Button>
               </FormControl>

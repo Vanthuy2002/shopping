@@ -107,7 +107,7 @@ const FileUpload = ({
             ></input>
             Upload Image
           </Label>
-          <Button onClick={handleRemoveImage} variant='remove'>
+          <Button size='lg' onClick={handleRemoveImage} variant='remove'>
             Remove
           </Button>
         </Fragment>

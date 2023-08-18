@@ -24,9 +24,14 @@ const queryProducts = async (query: string) => {
   return products;
 };
 
+const deleteProduct = async (id: number) => {
+  await apiProduct.delete<ReponseFromApi>(`/${id}`);
+};
+
 export {
   getProductsByCategories,
   getSingleProduct,
   getAllCategory,
   queryProducts,
+  deleteProduct,
 };

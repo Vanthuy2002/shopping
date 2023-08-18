@@ -1,5 +1,4 @@
 import FlexLayout from 'src/Layout/Flex';
-import { CountProducts } from 'src/components/Products/Detail';
 import PriceDetails from 'src/components/Products/Detail/Price';
 import Rating from 'src/components/Rating';
 import Typography from 'src/components/Typography';
@@ -80,7 +79,6 @@ const DetailsProduct = () => {
               }
               oldPrice={data?.price}
             />
-            <CountProducts />
             <Button size='lg' variant='secondary'>
               Add to cart
             </Button>
