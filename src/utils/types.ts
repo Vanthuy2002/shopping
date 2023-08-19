@@ -89,7 +89,7 @@ export interface ListProps {
 }
 
 export interface ItemCartProps {
-  product_id: number;
+  productId: number;
   quantity: number;
 }
 

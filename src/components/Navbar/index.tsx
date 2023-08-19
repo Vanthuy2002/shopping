@@ -50,11 +50,18 @@ const Navbar = () => {
                 <User user={user} />
               </>
             ) : (
-              <Button onClick={() => navigate('/register')}>Get Started</Button>
+              <Button size='lg' onClick={() => navigate('/register')}>
+                Get Started
+              </Button>
             )}
           </FlexLayout>
 
-          <Button customstyles='md:hidden' variant='light' onClick={toggle}>
+          <Button
+            size='normal'
+            customstyles='md:hidden'
+            variant='light'
+            onClick={toggle}
+          >
             {show ? (
               <XMarkIcon className='w-6 h-6' />
             ) : (

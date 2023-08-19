@@ -33,7 +33,7 @@ const TableItem = ({ id, quantity }: { id?: number; quantity?: number }) => {
         </FlexLayout>
       </td>
       <td className='px-6 py-4'>
-        <CountProducts quantity={quantity as number} />
+        <CountProducts id={data?.id as number} quantity={quantity as number} />
       </td>
       <td className='px-6 py-4 font-semibold text-gray-900 dark:text-white'>
         ${getNewPrice(data?.price, data?.discountPercentage)}

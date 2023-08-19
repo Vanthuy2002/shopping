@@ -4,12 +4,10 @@ import TableItem from 'src/components/Table/Item';
 import { getCartProducts } from 'src/services/cart.service';
 import { createUUID } from 'src/utils/constants';
 
-const defaultId = 1;
-
 const CartPage = () => {
   const { data } = useQuery({
-    queryKey: ['cart', defaultId],
-    queryFn: () => getCartProducts(defaultId),
+    queryKey: ['cart'],
+    queryFn: getCartProducts,
   });
 
   return (
@@ -39,7 +37,7 @@ const CartPage = () => {
                 data.items.map((item) => (
                   <TableItem
                     key={createUUID()}
-                    id={item.product_id}
+                    id={item.productId}
                     quantity={item.quantity}
                   />
                 ))}
