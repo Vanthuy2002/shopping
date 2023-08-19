@@ -140,7 +140,7 @@ const Register = () => {
                 </div>
               </FlexLayout>
 
-              <Button disabled={isSubmitting} customstyles='w-full'>
+              <Button size='lg' disabled={isSubmitting} customstyles='w-full'>
                 Create an account
               </Button>
 

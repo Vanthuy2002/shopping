@@ -33,6 +33,7 @@ const Routing = () => {
     });
     return () => unsubscribe();
   }, [setUser]);
+
   return (
     <Suspense fallback={<Loading />}>
       <Routes>

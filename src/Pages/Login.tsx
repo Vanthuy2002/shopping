@@ -126,7 +126,7 @@ const Login = () => {
                 </Link>
               </FlexLayout>
 
-              <Button disabled={isSubmitting} customstyles='w-full'>
+              <Button size='lg' disabled={isSubmitting} customstyles='w-full'>
                 Login
               </Button>
 

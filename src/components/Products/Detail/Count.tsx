@@ -10,6 +10,7 @@ const CountProducts = ({ quantity }: { quantity: number }) => {
       quantity = quantity - 1;
     }
   };
+
   return (
     <FlexLayout className='space-x-3'>
       <Button onClick={() => handleQuanti('down')} size='md' variant='light'>
@@ -20,7 +21,7 @@ const CountProducts = ({ quantity }: { quantity: number }) => {
           defaultValue={quantity}
           type='number'
           id='first_product'
-          className='px-2 py-1 w-16 rounded-md border-2 border-gray-200 focus:border-purple-500'
+          className='w-16 px-2 py-1 border-2 border-gray-200 rounded-md focus:border-purple-500'
           placeholder='1'
         />
       </div>

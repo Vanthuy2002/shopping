@@ -77,7 +77,7 @@ export interface ReponseFromApi {
   category: string;
   thumbnail: string;
   images: string[];
-  isDeleted: boolean;
+  isCart: boolean;
 }
 export type PriceConvert = number | undefined;
 
@@ -88,24 +88,13 @@ export interface ListProps {
   isButton?: boolean;
 }
 
-interface ProductCartProps {
-  id: number;
-  title: string;
-  price: number;
+export interface ItemCartProps {
+  product_id: number;
   quantity: number;
-  total: number;
-  discountPercentage: number;
-  discountedPrice: number;
-  isDeleted: boolean;
 }
 
-export interface CartFromApi {
+export interface CartProps {
   id: number;
-  total: number;
-  discountedTotal: number;
-  userId: number;
-  totalProducts: number;
-  totalQuantity: number;
-
-  products: ProductCartProps[];
+  user_id: string;
+  items: ItemCartProps[];
 }

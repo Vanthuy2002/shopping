@@ -1,11 +1,6 @@
 import axios from 'axios';
 
 export const api = axios.create({
-  baseURL: 'https://dummyjson.com',
-  headers: { 'Content-Type': 'application/json' },
-});
-
-export const apiProduct = axios.create({
-  baseURL: 'https://dummyjson.com/products',
+  baseURL: 'http://localhost:3000',
   headers: { 'Content-Type': 'application/json' },
 });
