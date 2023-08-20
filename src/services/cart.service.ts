@@ -26,4 +26,12 @@ const updateProductQuantity = async (
   return res.data;
 };
 
-export { getCartProducts, updateProductQuantity };
+const removeProductsInCart = async (body: CartProps, idProducts: number) => {
+  const res = await api.put('/carts/1', {
+    ...body,
+    items: body.items.filter((item) => item.productId !== idProducts),
+  });
+  return res.data;
+};
+
+export { getCartProducts, updateProductQuantity, removeProductsInCart };

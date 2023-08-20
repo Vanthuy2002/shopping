@@ -32,7 +32,7 @@ export const getNewPrice = (
 ): PriceConvert | string => {
   if (oldPrice && discount) {
     const newPrice = oldPrice - discount;
-    return newPrice.toFixed(2);
+    return newPrice.toFixed(0);
   }
   return oldPrice;
 };
