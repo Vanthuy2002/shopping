@@ -6,4 +6,24 @@ const getCartProducts = async () => {
   return res.data;
 };
 
-export { getCartProducts };
+const updateProductQuantity = async (
+  body: CartProps,
+  idProducts: number,
+  quantity: number
+) => {
+  const res = await api.put(`/carts/1`, {
+    ...body,
+    items: body.items.map((item) => {
+      if (item.productId === idProducts) {
+        return {
+          ...item,
+          quantity,
+        };
+      }
+      return item;
+    }),
+  });
+  return res.data;
+};
+
+export { getCartProducts, updateProductQuantity };

@@ -1,18 +1,45 @@
-import { TrashIcon } from '@heroicons/react/24/outline';
-import { useQuery } from '@tanstack/react-query';
+import { CheckCircleIcon, TrashIcon } from '@heroicons/react/24/outline';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FlexLayout from 'src/Layout/Flex';
 import Discount from 'src/components/Discount';
 import { CountProducts } from 'src/components/Products/Detail';
 import Button from 'src/modules/Button';
+import { updateProductQuantity } from 'src/services/cart.service';
 import { getSingleProduct } from 'src/services/products.sevice';
 import { getNewPrice } from 'src/utils/constants';
+import { CartProps } from 'src/utils/types';
+import { toast } from 'react-toastify';
 
-const TableItem = ({ id, quantity }: { id?: number; quantity?: number }) => {
+const TableItem = ({
+  id,
+  quantity,
+  cartData,
+}: {
+  id?: number;
+  quantity?: number;
+  cartData: CartProps;
+}) => {
+  const [Qty, setQty] = useState<number>(quantity || 0);
+
   const { data } = useQuery({
     queryKey: ['details', id],
     queryFn: () => getSingleProduct(id as number),
   });
+
+  const mutation = useMutation({
+    mutationKey: ['carts', id],
+    mutationFn: () => updateProductQuantity(cartData, id as number, Qty),
+  });
+
+  const update = () => {
+    toast.success('Update carts succeed!!');
+    mutation.mutate();
+  };
+
+  const priceProducts = getNewPrice(data?.price, data?.discountPercentage);
+  const newPrice = Number(priceProducts) * Qty;
 
   return (
     <tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
@@ -20,7 +47,7 @@ const TableItem = ({ id, quantity }: { id?: number; quantity?: number }) => {
         <img
           src={data?.images[0]}
           alt={data?.title}
-          className='flex-shrink-0 object-cover w-32 rounded h-28'
+          className='flex-shrink-0 object-cover w-24 h-24 rounded'
         />
         <FlexLayout className='flex-col gap-y-2 !items-start'>
           <Link
@@ -33,15 +60,20 @@ const TableItem = ({ id, quantity }: { id?: number; quantity?: number }) => {
         </FlexLayout>
       </td>
       <td className='px-6 py-4'>
-        <CountProducts id={data?.id as number} quantity={quantity as number} />
+        <CountProducts quantity={Qty} setQuantyti={setQty} />
       </td>
       <td className='px-6 py-4 font-semibold text-gray-900 dark:text-white'>
-        ${getNewPrice(data?.price, data?.discountPercentage)}
+        ${newPrice}
       </td>
       <td className='px-6 py-4'>
-        <Button variant='remove' size='normal'>
-          <TrashIcon className='w-6 h-6' />
-        </Button>
+        <FlexLayout className='gap-2'>
+          <Button onClick={update} variant='secondary' size='normal'>
+            <CheckCircleIcon className='w-6 h-6' />
+          </Button>
+          <Button variant='remove' size='normal'>
+            <TrashIcon className='w-6 h-6' />
+          </Button>
+        </FlexLayout>
       </td>
     </tr>
   );

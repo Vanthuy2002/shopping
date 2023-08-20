@@ -39,6 +39,7 @@ const CartPage = () => {
                     key={createUUID()}
                     id={item.productId}
                     quantity={item.quantity}
+                    cartData={data}
                   />
                 ))}
             </Fragment>
