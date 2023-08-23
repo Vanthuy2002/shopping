@@ -21,7 +21,6 @@ const ListProducts = ({
   });
 
   const navigate = useNavigate();
-
   return (
     <section className='max-w-screen-xl mx-auto mt-16'>
       {label && (

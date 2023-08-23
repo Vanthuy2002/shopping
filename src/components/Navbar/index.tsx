@@ -20,7 +20,6 @@ const Navbar = () => {
 
   const user = useAppStore((state) => state.users);
   const toggleTheme = useAppStore((state) => state.toggleTheme);
-  const theme = useAppStore((state) => state.theme);
 
   const handleToggle = (e: IEvents) => {
     toggleTheme(e.target.checked);
@@ -32,18 +31,18 @@ const Navbar = () => {
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (query.length === 0) return;
     navigate(`/search/${query}`);
-    setQuery('');
   };
 
   return (
-    <nav className='h-20 bg-white border-gray-200 dark:bg-gray-900'>
+    <nav className='fixed top-0 z-50 w-full h-20 bg-white border-gray-200 dark:bg-gray-900'>
       <FlexLayout className='flex-wrap justify-between max-w-screen-xl p-4 mx-auto'>
         <WebBrand />
 
         <FlexLayout className='md:order-2 gap-x-2'>
           <FlexLayout className='gap-8'>
-            <Toggle onChange={handleToggle} text={theme} />
+            <Toggle onChange={handleToggle} text='Mode' />
             {user?.email ? (
               <>
                 <CartProducts />

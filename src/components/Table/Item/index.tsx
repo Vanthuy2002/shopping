@@ -1,20 +1,20 @@
-import { CheckCircleIcon, TrashIcon } from '@heroicons/react/24/outline';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
 import FlexLayout from 'src/Layout/Flex';
 import Discount from 'src/components/Discount';
-import { CountProducts } from 'src/components/Products/Detail';
 import Button from 'src/modules/Button';
-import {
-  removeProductsInCart,
-  updateProductQuantity,
-} from 'src/services/cart.service';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Tooltip } from 'react-tooltip';
+import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 import { getSingleProduct } from 'src/services/products.sevice';
 import { getNewPrice } from 'src/utils/constants';
+import { Fragment, useState } from 'react';
+import { CountProducts } from 'src/components/Products/Detail';
+import { CheckCircleIcon, TrashIcon } from '@heroicons/react/24/outline';
 import { CartProps } from 'src/utils/types';
-import { toast } from 'react-toastify';
-import { Tooltip } from 'react-tooltip';
+import {
+  updateProductQuantity,
+  removeProductsInCart,
+} from 'src/services/cart.service';
 
 const TableItem = ({
   id,
@@ -36,23 +36,27 @@ const TableItem = ({
   const mutation = useMutation({
     mutationKey: ['carts', id],
     mutationFn: () => updateProductQuantity(cartData, id as number, Qty),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cart'] });
+    },
   });
 
   const actionDelete = useMutation({
     mutationFn: () => removeProductsInCart(cartData, id as number),
+
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['cart'] });
     },
   });
 
   const deleteProducts = () => {
-    toast.success('Delete products success!!');
     actionDelete.mutate();
+    toast.success('Delete products success!!');
   };
 
   const update = () => {
-    toast.success('Update carts succeed!!');
     mutation.mutate();
+    toast.success('Update carts succeed!!');
   };
 
   const priceProducts = getNewPrice(data?.price, data?.discountPercentage);
@@ -69,7 +73,7 @@ const TableItem = ({
           />
           <FlexLayout className='flex-col gap-y-2 !items-start'>
             <Link
-              to={`/product/${id}`}
+              to={`/product/${id}?cart=true`}
               className='text-base font-semibold text-gray-600 dark:text-white'
             >
               {data?.title}

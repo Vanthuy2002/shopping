@@ -203,7 +203,7 @@ const Profile = () => {
                 />
               </FormControl>
 
-              <FormControl>
+              <FormControl className='flex gap-2'>
                 <Button
                   size='lg'
                   onClick={() => navigate('/')}

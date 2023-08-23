@@ -1,16 +1,22 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import FlexLayout from 'src/Layout/Flex';
 import Rating from 'src/components/Rating';
 import Typography from 'src/components/Typography';
 import Button from 'src/modules/Button';
+import { addToCart } from 'src/services/cart.service';
+import { useAppStore } from 'src/store';
 import { getNewPrice } from 'src/utils/constants';
-import { ReponseFromApi } from 'src/utils/types';
+import { CartProps, ReponseFromApi } from 'src/utils/types';
+import { toast } from 'react-toastify';
 
 type ItemProducts = {
   item: Partial<ReponseFromApi>;
 };
 
 const ProductItems = ({ item }: ItemProducts) => {
+  const carts = useAppStore((state) => state.carts);
+  const queryClient = useQueryClient();
   const {
     id,
     description,
@@ -20,6 +26,19 @@ const ProductItems = ({ item }: ItemProducts) => {
     rating,
     discountPercentage,
   } = item;
+
+  const mutation = useMutation({
+    mutationFn: () =>
+      addToCart(carts as CartProps, { productId: id as number, quantity: 1 }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cart'] });
+    },
+  });
+
+  const actionAdd = () => {
+    mutation.mutate();
+    toast.success('Add to cart successfully!!');
+  };
 
   return (
     <FlexLayout className='flex-col p-4 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700'>
@@ -56,7 +75,7 @@ const ProductItems = ({ item }: ItemProducts) => {
             >
               {getNewPrice(price, discountPercentage)} USD
             </Typography>
-            <Button size='lg' variant='secondary'>
+            <Button onClick={actionAdd} size='lg' variant='secondary'>
               Add to cart
             </Button>
           </FlexLayout>

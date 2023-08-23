@@ -20,10 +20,11 @@ const getAllCategory = async () => {
   return listCategory;
 };
 
-const queryProducts = async (query: string) => {
-  const res = await api.get(`/products?q=${query}`);
-  const products: ReponseFromApi[] = res.data.products;
-  return products;
+const queryProducts = async (query: string, page: number, limit: number) => {
+  const res = await api.get(
+    `/products?q=${query}&_page=${page}&_limit=${limit}`
+  );
+  return res;
 };
 
 const deleteProduct = async (id: number) => {

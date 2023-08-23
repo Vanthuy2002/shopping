@@ -1,5 +1,5 @@
 import { api } from 'src/api';
-import { CartProps } from 'src/utils/types';
+import { CartProps, ItemCartProps } from 'src/utils/types';
 
 const getCartProducts = async () => {
   const res = await api.get<CartProps>(`/carts/1`);
@@ -34,4 +34,19 @@ const removeProductsInCart = async (body: CartProps, idProducts: number) => {
   return res.data;
 };
 
-export { getCartProducts, updateProductQuantity, removeProductsInCart };
+const addToCart = async (body: CartProps, data: ItemCartProps) => {
+  if (body === null) return;
+  const cloneItems = [...body.items, data];
+  const res = await api.put('/carts/1', {
+    ...body,
+    items: cloneItems,
+  });
+  return res.data;
+};
+
+export {
+  getCartProducts,
+  updateProductQuantity,
+  removeProductsInCart,
+  addToCart,
+};
