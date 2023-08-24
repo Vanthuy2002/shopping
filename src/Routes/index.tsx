@@ -17,6 +17,7 @@ const Category = lazy(() => import('src/Pages/Category'));
 const Profile = lazy(() => import('src/Pages/Profile'));
 const SearchResults = lazy(() => import('src/Pages/SearchResults'));
 const CartPage = lazy(() => import('src/Pages/Cart'));
+const ManageUser = lazy(() => import('src/Pages/Dashboard/ManageUser'));
 
 const Routing = () => {
   const setUser = useAppStore((state) => state.setUser);
@@ -52,6 +53,7 @@ const Routing = () => {
         <Route path='me/profile' element={<Profile />} />
         <Route element={<DashboardLayout />}>
           <Route path='me/dashboard' element={<Dashboard />}></Route>
+          <Route path='me/users' element={<ManageUser />}></Route>
         </Route>
       </Routes>
     </Suspense>

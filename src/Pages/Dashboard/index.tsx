@@ -6,7 +6,7 @@ import Toggle from 'src/modules/Checkbox/Toggle';
 
 const Dashboard = () => {
   return (
-    <div className='mt-16 '>
+    <div className='mt-16'>
       <Typo as='h1' className='text-lg font-medium dark:text-white'>
         Main Dashboard
       </Typo>
