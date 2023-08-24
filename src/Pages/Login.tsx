@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import FlexLayout from 'src/Layout/Flex';
 import WebBrand from 'src/components/Brand';
-import Typography from 'src/components/Typography';
+import Typo from 'src/components/Typo';
 import Button from 'src/modules/Button';
 import Checkbox from 'src/modules/Checkbox';
 import { FormControl } from 'src/modules/Form';
@@ -68,9 +68,9 @@ const Login = () => {
 
         <div className='w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
           <div className='p-6 space-y-4 md:space-y-6 sm:p-8'>
-            <Typography className='text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white'>
+            <Typo className='text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white'>
               Sign in to your account
-            </Typography>
+            </Typo>
 
             <form
               className='space-y-4 md:space-y-6'
@@ -130,7 +130,7 @@ const Login = () => {
                 Login
               </Button>
 
-              <Typography
+              <Typo
                 as='p'
                 className='text-sm font-light text-gray-500 dark:text-gray-400'
               >
@@ -141,7 +141,7 @@ const Login = () => {
                 >
                   Register now
                 </Link>
-              </Typography>
+              </Typo>
             </form>
           </div>
         </div>

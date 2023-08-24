@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useNavigate } from 'react-router-dom';
 import { ProductItems } from 'src/components/Products';
-import Typography from 'src/components/Typography';
+import Typo from 'src/components/Typo';
 import Button from 'src/modules/Button';
 import { useQuery } from '@tanstack/react-query';
 import { getProductsByCategories } from 'src/services/products.sevice';
@@ -24,9 +24,9 @@ const ListProducts = ({
   return (
     <section className='max-w-screen-xl mx-auto mt-16'>
       {label && (
-        <Typography as='h2' className='mb-5 text-lg font-bold'>
+        <Typo as='h2' className='mb-5 text-lg font-bold'>
           {label}
-        </Typography>
+        </Typo>
       )}
       <div className={classNames('grid grid-cols-4 gap-5', className)}>
         {isLoading ? (

@@ -1,5 +1,5 @@
 import FlexLayout from 'src/Layout/Flex';
-import Typography from '../Typography';
+import Typo from '../Typo';
 import { contactList, createUUID } from 'src/utils/constants';
 
 const Contacts = () => {
@@ -7,17 +7,17 @@ const Contacts = () => {
     <FlexLayout className='justify-between w-full max-w-screen-xl py-4 mx-auto'>
       <FlexLayout className='gap-4'>
         {contactList.contact.map((item) => (
-          <Typography key={createUUID()} as='span'>
+          <Typo key={createUUID()} as='span'>
             {item}
-          </Typography>
+          </Typo>
         ))}
       </FlexLayout>
 
       <FlexLayout className='gap-4'>
         {contactList.link.map((item) => (
-          <Typography key={createUUID()} className='text-[#6a983c]' as='span'>
+          <Typo key={createUUID()} className='text-[#6a983c]' as='span'>
             {item}
-          </Typography>
+          </Typo>
         ))}
       </FlexLayout>
     </FlexLayout>

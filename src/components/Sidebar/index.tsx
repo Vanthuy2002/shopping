@@ -1,6 +1,6 @@
 import { Fragment, SetStateAction, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import Typography from '../Typography';
+import Typo from '../Typo';
 import { menuSidebar } from 'src/utils/constants';
 import classNames from 'classnames';
 import { useOnClickOutside } from 'usehooks-ts';
@@ -44,12 +44,9 @@ const Sidebar = ({
                       <menu.icon className='w-8 h-8 text-gray-700 dark:text-white' />
                     }
                   </span>
-                  <Typography
-                    as='span'
-                    className='text-gray-500 dark:text-white'
-                  >
+                  <Typo as='span' className='text-gray-500 dark:text-white'>
                     {menu.title}
-                  </Typography>
+                  </Typo>
                 </NavLink>
               </li>
             ))}

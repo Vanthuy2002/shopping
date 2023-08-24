@@ -8,7 +8,7 @@ import FlexLayout from 'src/Layout/Flex';
 import Button from 'src/modules/Button';
 import UserInfo from '../User';
 import { useAppStore } from 'src/store';
-import Typography from '../Typography';
+import Typo from '../Typo';
 import Toggle from 'src/modules/Checkbox/Toggle';
 import { IEvents } from 'src/utils/types';
 
@@ -44,12 +44,12 @@ const NavDashBoard = ({
             </Button>
             <Link to='/' className='flex items-center'>
               <img src='/Logo.png' className='h-8 mr-3' alt='Logo' />
-              <Typography
+              <Typo
                 className='text-xl dark:text-white hidden md:block font-semibold'
                 as='span'
               >
                 Shopping App
-              </Typography>
+              </Typo>
             </Link>
           </FlexLayout>
 

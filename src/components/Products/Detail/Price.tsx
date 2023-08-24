@@ -1,4 +1,4 @@
-import Typography from 'src/components/Typography';
+import Typo from 'src/components/Typo';
 
 interface PriceProps {
   oldPrice?: number | undefined;
@@ -8,15 +8,15 @@ interface PriceProps {
 const PriceDetails = ({ oldPrice, newPrice }: PriceProps) => {
   return (
     <div>
-      <Typography as='p' className='text-2xl font-semibold text-[#6a983c]'>
+      <Typo as='p' className='text-2xl font-semibold text-[#6a983c]'>
         {newPrice} USD
-      </Typography>
-      <Typography
+      </Typo>
+      <Typo
         as='span'
         className='line-through text-xs font-semibold text-gray-500'
       >
         {oldPrice} USD
-      </Typography>
+      </Typo>
     </div>
   );
 };

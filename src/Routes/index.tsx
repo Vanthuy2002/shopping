@@ -8,6 +8,7 @@ import { useAppStore } from 'src/store';
 import Login from 'src/Pages/Login';
 import Register from 'src/Pages/Register';
 import DashboardLayout from 'src/Layout/Dashboard';
+import Dashboard from 'src/Pages/Dashboard';
 
 const Home = lazy(() => import('src/Pages/Home'));
 const CategoryDetails = lazy(() => import('src/Pages/CategoryDetail'));
@@ -49,7 +50,9 @@ const Routing = () => {
         <Route path='register' element={<Register />} />
         <Route path='login' element={<Login />} />
         <Route path='me/profile' element={<Profile />} />
-        <Route path='/me/dashboard' element={<DashboardLayout />}></Route>
+        <Route element={<DashboardLayout />}>
+          <Route path='me/dashboard' element={<Dashboard />}></Route>
+        </Route>
       </Routes>
     </Suspense>
   );

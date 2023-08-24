@@ -1,5 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
-import Typography from '../Typography';
+import Typo from '../Typo';
 import { useToggle, useOnClickOutside } from 'usehooks-ts';
 import { useRef } from 'react';
 import { User, signOut } from 'firebase/auth';
@@ -68,12 +68,12 @@ const UserInfo = ({ user, className = '' }: UserProps) => {
       {show && (
         <div className='absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow -translate-x-3/4 w-52 dark:bg-gray-700 dark:divide-gray-600'>
           <div className='px-4 py-3 text-sm text-gray-900 dark:text-white'>
-            <Typography as='p' className='mb-1'>
+            <Typo as='p' className='mb-1'>
               {user?.displayName || 'CLient Accounts'}
-            </Typography>
-            <Typography as='p' className='font-medium truncate'>
+            </Typo>
+            <Typo as='p' className='font-medium truncate'>
               {user?.email || 'Login to see more...'}
-            </Typography>
+            </Typo>
           </div>
           <ul
             className='py-2 text-sm text-gray-700 dark:text-gray-200'

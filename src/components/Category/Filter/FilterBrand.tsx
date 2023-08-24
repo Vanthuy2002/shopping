@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Typography from '../../Typography';
+import Typo from '../../Typo';
 import FlexLayout from 'src/Layout/Flex';
 import Toggle from 'src/modules/Checkbox/Toggle';
 import Rating from 'src/components/Rating';
@@ -20,9 +20,9 @@ const FilterBrand: React.FC = () => {
 
   return (
     <div className='w-full'>
-      <Typography as='h2' className='mb-4 text-lg font-semibold'>
+      <Typo as='h2' className='mb-4 text-lg font-semibold'>
         Ratings
-      </Typography>
+      </Typo>
       <FlexLayout className='flex-col-reverse !items-start gap-y-4'>
         {Array(5)
           .fill(0)

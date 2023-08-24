@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Typography from '../Typography';
+import Typo from '../Typo';
 import { useAppStore } from 'src/store';
 
 const CartProducts = () => {
@@ -13,12 +13,12 @@ const CartProducts = () => {
     >
       <img src='/cart.svg' alt='cart' className='object-cover w-6 h-6' />
       {(totalProducts as number) > 0 && (
-        <Typography
+        <Typo
           as='span'
           className='absolute top-0 right-0 w-5 h-5 leading-5 text-center text-white bg-red-500 rounded-full'
         >
           {totalProducts}
-        </Typography>
+        </Typo>
       )}
     </Link>
   );

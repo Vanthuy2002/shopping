@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Typography from '../Typography';
+import Typo from '../Typo';
 import classNames from 'classnames';
 
 const WebBrand = ({ className }: { className?: string }) => {
@@ -12,7 +12,7 @@ const WebBrand = ({ className }: { className?: string }) => {
       )}
     >
       <img src='/Logo.png' className='w-9 h-9 object-cover' alt='' />
-      <Typography as='span'>Shopping</Typography>
+      <Typo as='span'>Shopping</Typo>
     </Link>
   );
 };

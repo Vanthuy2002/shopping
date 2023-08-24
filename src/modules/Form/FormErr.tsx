@@ -1,11 +1,11 @@
-import Typography from 'src/components/Typography';
+import Typo from 'src/components/Typo';
 import { ChildProps } from 'src/utils/types';
 
 const FormErr = ({ children }: { children: ChildProps }) => {
   return (
-    <Typography className='text-red-500 text-xs mt-1' as='span'>
+    <Typo className='text-red-500 text-xs mt-1' as='span'>
       {children}
-    </Typography>
+    </Typo>
   );
 };
 

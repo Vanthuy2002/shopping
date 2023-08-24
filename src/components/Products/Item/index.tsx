@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import FlexLayout from 'src/Layout/Flex';
 import Rating from 'src/components/Rating';
-import Typography from 'src/components/Typography';
+import Typo from 'src/components/Typo';
 import Button from 'src/modules/Button';
 import { addToCart } from 'src/services/cart.service';
 import { useAppStore } from 'src/store';
@@ -51,30 +51,27 @@ const ProductItems = ({ item }: ItemProducts) => {
       </Link>
       <div className='flex flex-col flex-1 mt-5'>
         <Link to={`/product/${id}`}>
-          <Typography
+          <Typo
             as='h5'
             className='mb-2 text-sm font-medium tracking-tight text-gray-900 dark:text-white'
           >
             {title}
-          </Typography>
+          </Typo>
         </Link>
-        <Typography
+        <Typo
           as='p'
           className='mb-3 text-xs text-gray-500 text-over dark:text-gray-400'
         >
           {description}
-        </Typography>
+        </Typo>
 
         <div className='mt-auto'>
           <Rating star={Math.floor(rating as number)} />
 
           <FlexLayout className='justify-between'>
-            <Typography
-              as='h3'
-              className='text-lg font-semibold dark:text-white'
-            >
+            <Typo as='h3' className='text-lg font-semibold dark:text-white'>
               {getNewPrice(price, discountPercentage)} USD
-            </Typography>
+            </Typo>
             <Button onClick={actionAdd} size='lg' variant='secondary'>
               Add to cart
             </Button>

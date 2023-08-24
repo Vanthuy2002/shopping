@@ -4,7 +4,7 @@ import Input from '../modules/Input';
 import FlexLayout from 'src/Layout/Flex';
 import Checkbox from 'src/modules/Checkbox';
 import Button from 'src/modules/Button';
-import Typography from 'src/components/Typography';
+import Typo from 'src/components/Typo';
 import { FormControl } from 'src/modules/Form';
 import WebBrand from 'src/components/Brand';
 import FormErr from 'src/modules/Form/FormErr';
@@ -79,9 +79,9 @@ const Register = () => {
 
         <div className='w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700'>
           <div className='p-6 space-y-4 md:space-y-6 sm:p-8'>
-            <Typography className='text-xl font-bold leading-tight tracking-tight text-gray-700 md:text-2xl dark:text-white'>
+            <Typo className='text-xl font-bold leading-tight tracking-tight text-gray-700 md:text-2xl dark:text-white'>
               Create and account
-            </Typography>
+            </Typo>
             <form
               onSubmit={handleSubmit(handleRegister)}
               className='space-y-4 md:space-y-6'
@@ -144,7 +144,7 @@ const Register = () => {
                 Create an account
               </Button>
 
-              <Typography
+              <Typo
                 as='p'
                 className='text-sm font-light text-gray-500 dark:text-gray-400'
               >
@@ -155,7 +155,7 @@ const Register = () => {
                 >
                   Login here
                 </Link>
-              </Typography>
+              </Typo>
             </form>
           </div>
         </div>

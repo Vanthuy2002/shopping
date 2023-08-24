@@ -1,7 +1,7 @@
 import FlexLayout from 'src/Layout/Flex';
 import PriceDetails from 'src/components/Products/Detail/Price';
 import Rating from 'src/components/Rating';
-import Typography from 'src/components/Typography';
+import Typo from 'src/components/Typo';
 import Button from 'src/modules/Button';
 import { getNewPrice } from 'src/utils/constants';
 import { useQuery } from '@tanstack/react-query';
@@ -61,15 +61,13 @@ const DetailsProduct = () => {
 
         {/* artice */}
         <article>
-          <Typography className='font-semibold text-[32px] mb-2'>
-            {data?.title}
-          </Typography>
+          <Typo className='font-semibold text-[32px] mb-2'>{data?.title}</Typo>
 
           <Rating star={data && Math.floor(data.rating)} />
 
-          <Typography as='p' className='my-10'>
+          <Typo as='p' className='my-10'>
             {data?.description}
-          </Typography>
+          </Typo>
 
           {/* infomations */}
           <FlexLayout className='justify-between'>
@@ -85,9 +83,9 @@ const DetailsProduct = () => {
           </FlexLayout>
 
           {/* relate products */}
-          <Typography as='p' className='my-8 text-lg font-semibold'>
+          <Typo as='p' className='my-8 text-lg font-semibold'>
             Related Products
-          </Typography>
+          </Typo>
           <div className='grid grid-cols-2 gap-8'>
             {isLoading ? (
               <Fragment>

@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { ProductItems } from 'src/components/Products';
-import Typography from 'src/components/Typography';
+import Typo from 'src/components/Typo';
 import Seleton from 'src/modules/Effect/Seleton';
 import { Fragment, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -25,11 +25,11 @@ const SearchResults = () => {
 
   return (
     <section className='max-w-screen-xl mx-auto mt-16'>
-      <Typography as='h2' className='mb-5 text-lg font-semibold'>
+      <Typo as='h2' className='mb-5 text-lg font-semibold'>
         {data && totalProducts
           ? `Founded ${totalProducts} products`
           : 'No products was found'}
-      </Typography>
+      </Typo>
       <div className={classNames('grid grid-cols-4 gap-5')}>
         {isLoading ? (
           <Fragment>
