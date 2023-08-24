@@ -65,7 +65,7 @@ const UserInfo = ({ user }: UserProps) => {
       />
 
       {show && (
-        <div className='absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow -translate-x-3/4 w-44 dark:bg-gray-700 dark:divide-gray-600'>
+        <div className='absolute z-10 bg-white divide-y divide-gray-100 rounded-lg shadow -translate-x-3/4 w-52 dark:bg-gray-700 dark:divide-gray-600'>
           <div className='px-4 py-3 text-sm text-gray-900 dark:text-white'>
             <Typography as='p' className='mb-1'>
               {user?.displayName || 'CLient Accounts'}

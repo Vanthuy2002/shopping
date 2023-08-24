@@ -42,7 +42,7 @@ const Navbar = () => {
 
         <FlexLayout className='md:order-2 gap-x-2'>
           <FlexLayout className='gap-8'>
-            <Toggle onChange={handleToggle} text='Mode' />
+            <Toggle onChange={handleToggle} text='Theme' />
             {user?.email ? (
               <>
                 <CartProducts />
