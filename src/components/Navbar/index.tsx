@@ -11,7 +11,7 @@ import CartProducts from '../Cart';
 import { useAppStore } from 'src/store';
 import Toggle from 'src/modules/Checkbox/Toggle';
 import { IEvents } from 'src/utils/types';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -44,10 +44,10 @@ const Navbar = () => {
           <FlexLayout className='gap-8'>
             <Toggle onChange={handleToggle} text='Theme' />
             {user?.email ? (
-              <>
+              <Fragment>
                 <CartProducts />
                 <User user={user} />
-              </>
+              </Fragment>
             ) : (
               <Button size='lg' onClick={() => navigate('/register')}>
                 Get Started

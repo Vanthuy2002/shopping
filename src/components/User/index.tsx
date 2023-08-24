@@ -15,6 +15,7 @@ type optionsUsers = {
 
 interface UserProps {
   user: User | null;
+  className?: string;
 }
 
 const options: optionsUsers[] = [
@@ -22,7 +23,7 @@ const options: optionsUsers[] = [
   { id: 2, title: 'Profile', to: 'me/profile' },
 ];
 
-const UserInfo = ({ user }: UserProps) => {
+const UserInfo = ({ user, className = '' }: UserProps) => {
   const [show, toggle, setShow] = useToggle(false);
   const ref = useRef(null);
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ const UserInfo = ({ user }: UserProps) => {
   };
 
   return (
-    <section className='relative' ref={ref}>
+    <section className={`relative, ${className}`} ref={ref}>
       <img
         className='object-cover w-10 h-10 rounded-full cursor-pointer'
         src={user?.photoURL || '/avatar.jpg'}
@@ -81,7 +82,7 @@ const UserInfo = ({ user }: UserProps) => {
             {options.map((option) => (
               <li key={option.id}>
                 <Link
-                  to={option.to}
+                  to={`/${option.to}`}
                   className='block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white'
                 >
                   {option.title}

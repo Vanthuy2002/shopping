@@ -19,7 +19,7 @@ const Toggle = ({ text, customClass = '', ...props }: ToggleProps) => {
       <Typography
         as='span'
         className={classNames(
-          'ml-3 text-sm font-medium text-gray-900 dark:text-gray-300',
+          'ml-3 hidden sm:block text-sm font-medium text-gray-900 dark:text-gray-300',
           customClass
         )}
       >

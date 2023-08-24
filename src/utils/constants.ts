@@ -2,9 +2,17 @@ import {
   FormValidateProps,
   PriceConvert,
   RoleProps,
+  TypeSideBarMenu,
   UserStatusProps,
   contactsListProps,
 } from './types';
+
+import {
+  ChartPieIcon,
+  Squares2X2Icon,
+  UserCircleIcon,
+  ReceiptPercentIcon,
+} from '@heroicons/react/20/solid';
 
 export const contactList: contactsListProps = {
   contact: ['Chat with us', '+420 336 775 664', 'info@freshnesecom.com'],
@@ -54,3 +62,30 @@ export const userStatus: UserStatusProps = {
   PENDING: 'Pending',
   BANNER: 'Banner',
 };
+
+export const menuSidebar: TypeSideBarMenu[] = [
+  {
+    id: createUUID(),
+    title: 'Dashboard',
+    to: 'me/dashboard',
+    icon: ChartPieIcon,
+  },
+  {
+    id: createUUID(),
+    title: 'Products',
+    to: 'me/products',
+    icon: Squares2X2Icon,
+  },
+  {
+    id: createUUID(),
+    title: 'Discounts',
+    to: 'me/discount',
+    icon: ReceiptPercentIcon,
+  },
+  {
+    id: createUUID(),
+    title: 'Manage User',
+    to: 'me/users',
+    icon: UserCircleIcon,
+  },
+];

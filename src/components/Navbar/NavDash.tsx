@@ -6,15 +6,19 @@ import {
 import { Link } from 'react-router-dom';
 import FlexLayout from 'src/Layout/Flex';
 import Button from 'src/modules/Button';
-import { useToggle } from 'usehooks-ts';
 import UserInfo from '../User';
 import { useAppStore } from 'src/store';
 import Typography from '../Typography';
 import Toggle from 'src/modules/Checkbox/Toggle';
 import { IEvents } from 'src/utils/types';
 
-const NavDashBoard = () => {
-  const [show, toggle] = useToggle(false);
+const NavDashBoard = ({
+  show,
+  toggle,
+}: {
+  show: boolean;
+  toggle: () => void;
+}) => {
   const user = useAppStore((state) => state.users);
   const toggleTheme = useAppStore((state) => state.toggleTheme);
 
@@ -52,7 +56,7 @@ const NavDashBoard = () => {
           {/* USER with dropdown */}
           <FlexLayout className='gap-4'>
             <Toggle onChange={handleToggle} text='Theme' />
-            <UserInfo user={user} />
+            <UserInfo className='flex-shrink-0' user={user} />
 
             <Button size='md' variant='light'>
               <EllipsisHorizontalIcon className='w-6 h-6' />

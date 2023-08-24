@@ -98,3 +98,15 @@ export interface CartProps {
   user_id: string;
   items: ItemCartProps[];
 }
+
+export interface TypeSideBarMenu {
+  id: string;
+  title: string;
+  to: string;
+  icon: React.ForwardRefExoticComponent<
+    Omit<React.SVGProps<SVGSVGElement>, 'ref'> & {
+      title?: string | undefined;
+      titleId?: string | undefined;
+    } & React.RefAttributes<SVGSVGElement>
+  >;
+}
