@@ -35,17 +35,8 @@ export type IEventAllTags = React.ChangeEvent<
   HTMLInputElement | HTMLTextAreaElement
 >;
 
-export interface RoleProps {
-  USER: string;
-  ADMIN: string;
-  SELLER: string;
-}
-
-// defined user status type
-export interface UserStatusProps {
-  ACTIVE: string;
-  PENDING: string;
-  BANNER: string;
+export interface UserRolesAndStatus {
+  [key: string]: string;
 }
 
 export type UserUpdate = {
@@ -62,8 +53,7 @@ export type UserUpdate = {
   confirm: string;
   desc: string;
   imageStore: string;
-} & RoleProps &
-  UserStatusProps;
+} & UserRolesAndStatus;
 
 export interface ReponseFromApi {
   id: number;
