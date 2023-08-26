@@ -1,18 +1,27 @@
 import { PencilIcon, TrashIcon } from '@heroicons/react/20/solid';
+import { useRef } from 'react';
 import FlexLayout from 'src/Layout/Flex';
 import Dropdown from 'src/components/Dropdown';
-import ModalBase from 'src/components/Modal';
+import { ModalEditUser, ModalAddNew } from 'src/components/Modal';
 import Button from 'src/modules/Button';
 import Checkbox from 'src/modules/Checkbox';
 import Input from 'src/modules/Input';
 import Tags from 'src/modules/Tags';
+import { useToggle } from 'usehooks-ts';
+import TransitionComp from 'src/components/Transitons';
 
 const ManageUser = () => {
+  const [showModalEdit, toggleModalEdit, setShowModalEdit] = useToggle(false);
+  const [showAddModal, toggleAddModal] = useToggle(false);
+  const nodeRef = useRef(null);
+
+  const handleClose = (bool: boolean) => setShowModalEdit(!bool);
+
   return (
     <section className='mt-16'>
       <div className='relative overflow-x-auto shadow-md sm:rounded-lg'>
         <div className='flex items-center justify-between p-4 bg-white dark:bg-gray-800'>
-          <Dropdown />
+          <Dropdown onClick={toggleAddModal} />
           <Input style={{ width: 300 }} placeholder='Search for user....' />
         </div>
 
@@ -69,7 +78,11 @@ const ManageUser = () => {
               </td>
               <td className='px-6 py-4'>
                 <FlexLayout className='gap-2'>
-                  <Button variant='secondary' size='normal'>
+                  <Button
+                    onClick={toggleModalEdit}
+                    variant='secondary'
+                    size='normal'
+                  >
                     <PencilIcon className='w-5 h-5' />
                   </Button>
                   <Button variant='remove' size='normal'>
@@ -81,8 +94,25 @@ const ManageUser = () => {
           </tbody>
         </table>
 
-        {/* modal */}
-        <ModalBase />
+        <TransitionComp
+          className='modal'
+          inTo={showModalEdit}
+          nodeRef={nodeRef}
+          onExit={() => handleClose(showModalEdit)}
+          timeout={300}
+        >
+          <ModalEditUser ref={nodeRef} toggle={toggleModalEdit} />
+        </TransitionComp>
+
+        <TransitionComp
+          inTo={showAddModal}
+          className='modal'
+          nodeRef={nodeRef}
+          onExit={() => handleClose(showAddModal)}
+          timeout={300}
+        >
+          <ModalAddNew ref={nodeRef} toggle={toggleAddModal} />
+        </TransitionComp>
       </div>
     </section>
   );

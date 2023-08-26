@@ -22,6 +22,10 @@ export interface FlexProps {
   gap: string | number;
   className: string;
 }
+
+export interface ModalBaseProps {
+  toggle: () => void;
+}
 export interface FormValidateProps {
   required: string;
   email: string;
@@ -35,8 +39,16 @@ export type IEventAllTags = React.ChangeEvent<
   HTMLInputElement | HTMLTextAreaElement
 >;
 
-export interface UserRolesAndStatus {
-  [key: string]: string;
+export interface UserRoles {
+  ADMIN: 'Admin';
+  SELLER: 'Seller';
+  USER: 'User';
+}
+
+export interface UserStatusProps {
+  ACTIVE: 'Active';
+  PENDING: 'Pending';
+  BANNER: 'Banner';
 }
 
 export type UserUpdate = {
@@ -53,7 +65,8 @@ export type UserUpdate = {
   confirm: string;
   desc: string;
   imageStore: string;
-} & UserRolesAndStatus;
+} & UserRoles &
+  UserStatusProps;
 
 export interface ReponseFromApi {
   id: number;

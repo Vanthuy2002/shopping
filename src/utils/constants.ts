@@ -2,7 +2,6 @@ import {
   FormValidateProps,
   PriceConvert,
   TypeSideBarMenu,
-  UserRolesAndStatus,
   contactsListProps,
 } from './types';
 
@@ -50,7 +49,7 @@ export const capitalize = (word: string): string => {
   return newCharacter;
 };
 
-export const roleUser: UserRolesAndStatus = {
+export const roleUser: Record<string, string> = {
   ADMIN: 'Admin',
   SELLER: 'Seller',
   USER: 'User',
@@ -61,7 +60,9 @@ export const optionsRoles = Object.keys(roleUser).map((key) => ({
   title: roleUser[key],
 }));
 
-export const userStatus: UserRolesAndStatus = {
+// results : [{ value: "ADMIN", title: "Admin" },...]
+
+export const userStatus: Record<string, string> = {
   ACTIVE: 'Active',
   PENDING: 'Pending',
   BANNER: 'Banner',
